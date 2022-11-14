@@ -13,9 +13,7 @@ proxies:
     recv_window_conn: 9175040
     recv_window: 36700160
     disable_mtu_discovery: true
-
-
-- name: 🇰🇷 韩国_hy
+  - name: 🇰🇷 韩国_hy
     type: hysteria
     server: www.yuji2022.gq
     port: 22345
@@ -29,9 +27,7 @@ proxies:
     recv_window_conn: 5767168
     recv_window: 23068672
     disable_mtu_discovery: true
-
-
-- name: 德国_hy
+  - name: 德国_hy
     type: hysteria
     server: hy.fr1113.ol.yjbzl.cn
     port: 9527
@@ -45,9 +41,7 @@ proxies:
     recv_window_conn: 9175040
     recv_window: 36700160
     disable_mtu_discovery: true
-
-
-- name: 🇯🇵 大阪_hy
+  - name: 🇯🇵 大阪_hy
     type: hysteria
     server: blog.yuji2022.ml
     port: 45674
@@ -61,7 +55,6 @@ proxies:
     recv_window_conn: 10223616
     recv_window: 40894464
     disable_mtu_discovery: true
-    
   - name: 🇺🇸 美国_hy
     type: hysteria
     server: www.yuji2022.cf
