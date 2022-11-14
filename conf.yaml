@@ -27,7 +27,7 @@ proxies:
     recv_window_conn: 5767168
     recv_window: 23068672
     disable_mtu_discovery: true
-  - name: 德国_hy
+  - name: 🇩🇪 德国_hy
     type: hysteria
     server: hy.fr1113.ol.yjbzl.cn
     port: 9527
