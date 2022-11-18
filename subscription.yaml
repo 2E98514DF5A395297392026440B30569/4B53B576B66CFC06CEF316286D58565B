@@ -72,7 +72,6 @@ proxy-groups:
   - name: 🍃 一元机场
     use:
       - yiyuan
-      - vps
     type: select
 rule-providers:
 #广告拦截             
