@@ -1,0 +1,179 @@
+mixed-port: 7890
+allow-lan: true
+mode: rule
+log-level: info
+ipv6: true
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  ipv6: true
+  enhanced-mode: redir-host
+  nameserver:
+    - "223.5.5.5"
+    - "[2400:3200::1]:53"
+  fallback:
+    - "8.8.8.8"
+    - "[2001:4860:4860::8888]:53"
+  #添加需要直连的国内域名                                    
+  fake-ip-filter:
+    - baidu.com
+proxy-providers:
+  vps:
+    type: http
+    url: https://raw.githubusercontent.com/yujibuzailai2022/vps_clash_proxies/main/conf.yaml
+    interval: 86400
+    path: ./vps.yaml
+    health-check:
+      enable: true
+      interval: 600
+      url: https://www.gstatic.com/generate_204
+                        
+  yiyuan:
+    type: http
+    url: https://xn--4gq62f52gdss.com/api/v1/client/subscribe?token=4f98ea5dca1f52c5e3d32b1a228d2d75
+    interval: 3600
+    path: ./yiyuan.yaml
+    health-check:
+      enable: true
+      interval: 600
+      url: https://www.gstatic.com/generate_204
+proxy-groups:
+  - name: 🔰 Proxy
+    type: select
+    proxies:
+      - ♻ 自动选择
+      - 🔯 故障转移
+      - 🔮 负载均衡
+      - 🍃 一元机场
+    use:
+      - vps
+  - name: ♻ 自动选择
+    use:
+      - vps
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: "300"
+  - name: 🔯 故障转移
+    use:
+      - vps
+    type: fallback
+    url: https://www.gstatic.com/generate_204
+    interval: "300"
+  - name: 🔮 负载均衡
+    use:
+      - vps
+    type: load-balance
+    url: https://www.gstatic.com/generate_204
+    interval: "300"
+  - name: 🍃 一元机场
+    use:
+      - yiyuan
+      - vps
+    type: select
+rule-providers:
+#广告拦截             
+  BanAD:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanAD.yaml
+    path: ./ruleset/BanAD.yaml
+    interval: 86400
+  BanEasyList:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyList.yaml
+    path: ./ruleset/BanEasyList.yaml
+    interval: 86400
+  BanEasyListChina:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyListChina.yaml
+    path: ./ruleset/BanEasyListChina.yaml
+    interval: 86400
+  BanEasyPrivacy:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyPrivacy.yaml
+    path: ./ruleset/BanEasyPrivacy.yaml
+    interval: 86400
+  BanProgramAD:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/BanProgramAD.yaml
+    path: ./ruleset/BanProgramAD.yaml
+    interval: 86400
+#直连       
+  LocalAreaNetwork:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/LocalAreaNetwork.yaml
+    path: ./ruleset/LocalAreaNetwork.yaml
+    interval: 86400
+  UnBan:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/UnBan.yaml
+    path: ./ruleset/UnBan.yaml
+    interval: 86400
+  ChinaCompanyIp:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaCompanyIp.yaml
+    path: ./ruleset/ChinaCompanyIp.yaml
+    interval: 86400
+  ChinaDomain:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaDomain.yaml
+    path: ./ruleset/ChinaDomain.yaml
+    interval: 86400
+  ChinaIp:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaIp.yaml
+    path: ./ruleset/ChinaIp.yaml
+    interval: 86400
+  ChinaMedia:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ChinaMedia.yaml
+    path: ./ruleset/ChinaMedia.yaml
+    interval: 86400
+#代理       
+  ProxyGFWlist:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyGFWlist.yaml
+    path: ./ruleset/ProxyGFWlist.yaml
+    interval: 86400
+  ProxyMedia:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyMedia.yaml
+    path: ./ruleset/ProxyMedia.yaml
+    interval: 86400
+rules:
+#中国Play商店规则
+  - DOMAIN,googleapis.cn,🔰 Proxy
+#校园网          
+  - IP-CIDR,172.168.100.21/24,DIRECT
+#直连
+  - DOMAIN,clash.razord.top,DIRECT
+  - DOMAIN,yacd.haishan.me,DIRECT
+  - GEOIP,CN,DIRECT
+  - RULE-SET,ChinaMedia,DIRECT
+  - RULE-SET,LocalAreaNetwork,DIRECT
+  - RULE-SET,UnBan,DIRECT
+  - RULE-SET,ChinaCompanyIp,DIRECT
+  - RULE-SET,ChinaDomain,DIRECT
+  - RULE-SET,ChinaIp,DIRECT
+#广告拦截             
+  - RULE-SET,BanAD,REJECT
+  - RULE-SET,BanEasyList,REJECT
+  - RULE-SET,BanEasyListChina,REJECT
+  - RULE-SET,BanEasyPrivacy,REJECT
+  - RULE-SET,BanProgramAD,REJECT
+#代理       
+  - RULE-SET,ProxyMedia,🔰 Proxy
+  - RULE-SET,ProxyGFWlist,🔰 Proxy
+  - MATCH,🔰 Proxy
