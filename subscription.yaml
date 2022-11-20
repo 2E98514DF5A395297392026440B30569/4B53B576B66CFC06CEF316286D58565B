@@ -31,16 +31,16 @@ proxy-providers:
       enable: true
       interval: 600
       url: https://www.gstatic.com/generate_204
-                        
-#  yiyuan:
-#    type: http
-#    url: https://xn--4gq62f52gdss.com/api/v1/client/subscribe?token=3e8baf3e0110cee6bca49f75b8f9ad6e
-#    interval: 3600
-#    path: ./yiyuan.yaml
-#    health-check:
-#      enable: true
-#      interval: 600
-#      url: https://www.gstatic.com/generate_204
+ #魔戒机场                       
+  mojie:
+    type: http
+    url: https://mojie.nl/api/v1/client/subscribe?token=3aef0c8008bc55650388986833c3e2b7
+    interval: 3600
+    path: ./mojie.yaml
+    health-check:
+      enable: true
+      interval: 600
+      url: https://www.gstatic.com/generate_204
 proxy-groups:
   - name: 🔰 Proxy
     type: select
@@ -48,7 +48,7 @@ proxy-groups:
       - ♻ 自动选择
       - 🔯 故障转移
       - 🔮 负载均衡
-#      - 🍃 一元机场
+      - 🍃 魔戒
     use:
       - vps
   - name: ♻ 自动选择
@@ -69,10 +69,10 @@ proxy-groups:
     type: load-balance
     url: https://www.gstatic.com/generate_204
     interval: "300"
-#  - name: 🍃 一元机场
-#    use:
-#      - yiyuan
-#    type: select
+  - name: 🍃 魔戒
+    use:
+      - mojie
+    type: select
 rule-providers:
 #广告拦截             
   BanAD:
