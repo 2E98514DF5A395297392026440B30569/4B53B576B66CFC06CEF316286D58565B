@@ -5,19 +5,19 @@ log-level: info
 ipv6: true
 dns:
   enable: true
-  listen: 0.0.0.0:53
   ipv6: true
   default-nameserver:
-    - 114.114.114.114
-    - 223.5.5.5
+    - "223.5.5.5"
   enhanced-mode: redir-host
   nameserver:
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
+    - "https://dns.alidns.com/dns-query"
+    - "https://doh.pub/dns-query"
+    - "[2400:3200::1]:53"
   fallback:
-    - https://dns.google/dns-query
-    - tls://dns.google
-    - https://cloudflare-dns.com/dns-query
+    - "https://dns.google/dns-query"
+    - "tls://dns.google"
+    - "https://cloudflare-dns.com/dns-query"
+    - "[2001:4860:4860::8888]:53"
   #添加需要直连的国内域名                                    
   fake-ip-filter:
     - baidu.com
