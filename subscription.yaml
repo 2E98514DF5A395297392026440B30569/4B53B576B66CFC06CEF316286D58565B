@@ -1,3 +1,4 @@
+###  订阅文件  ###
 mixed-port: 7890
 allow-lan: true
 mode: rule
@@ -24,7 +25,7 @@ dns:
 proxy-providers:
   vps:
     type: http
-    url: https://raw.githubusercontent.com/yujibuzailai2022/vps_clash_proxies/main/conf.yaml
+    url: https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/conf.yaml
     interval: 86400
     path: ./vps.yaml
     health-check:
