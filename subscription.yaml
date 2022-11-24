@@ -43,11 +43,11 @@ proxy-providers:
       interval: 600
       url: https://www.gstatic.com/generate_204
  #两元店                       
-  ly:
+  liangyuandian:
     type: http
     url: https://xn--5hqx9equq.com/api/v1/client/subscribe?token=585a5d2c6a8039fba4e37f66834d02a8
     interval: 3600
-    path: ./ly.yaml
+    path: ./liangyuandian.yaml
     health-check:
       enable: true
       interval: 600
@@ -58,6 +58,16 @@ proxy-providers:
     url: https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/share/11.24.yml
     interval: 3600
     path: ./share1.yaml
+    health-check:
+      enable: true
+      interval: 600
+      url: https://www.gstatic.com/generate_204
+ #西数订阅                       
+  xishudingyue1:
+    type: http
+    url: https://fuqing.ch/modules/servers/fuqingsocks/osubscribe.php?sid=21202&token=CSQUST6YrBNH
+    interval: 3600
+    path: ./xishudingyue1.yaml
     health-check:
       enable: true
       interval: 600
@@ -93,7 +103,8 @@ proxy-groups:
   - name: 🍃 机场
     use:
       - share1
-      - ly
+      - liangyuandian
+      - xishudingyue1
       - mojie
     type: select
 rule-providers:
