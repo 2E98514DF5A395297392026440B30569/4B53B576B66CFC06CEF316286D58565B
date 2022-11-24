@@ -43,6 +43,16 @@ proxy-providers:
       enable: true
       interval: 600
       url: https://www.gstatic.com/generate_204
+ #群友分享1                       
+  qunyoufenxiang1:
+    type: http
+    url: https://xn--5hqx9equq.com/api/v1/client/subscribe?token=585a5d2c6a8039fba4e37f66834d02a8
+    interval: 3600
+    path: ./qunyoufenxiang1.yaml
+    health-check:
+      enable: true
+      interval: 600
+      url: https://www.gstatic.com/generate_204
  #分享整合                       
   share1:
     type: http
@@ -95,6 +105,7 @@ proxy-groups:
     use:
       - share1
       - liangyuandian
+      - qunyoufenxiang1
       - xishudingyue1
     type: select
 rule-providers:
