@@ -23,21 +23,12 @@ dns:
   fake-ip-filter:
     - baidu.com
 proxy-providers:
+ #自建节点
   vps:
     type: http
     url: https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/conf.yaml
     interval: 86400
     path: ./vps.yaml
-    health-check:
-      enable: true
-      interval: 600
-      url: https://www.gstatic.com/generate_204
- #魔戒机场                       
-  mojie:
-    type: http
-    url: https://sub.id9.cc/sub?target=clash&new_name=true&url=https%3A%2F%2Fmojie.nl%2Fapi%2Fv1%2Fclient%2Fsubscribe%3Ftoken%3D3aef0c8008bc55650388986833c3e2b7&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2FACL4SSR%2FACL4SSR%2Fmaster%2FClash%2Fconfig%2FACL4SSR_Online.ini&emoji=true&list=true&tfo=false&scv=false&fdn=false&sort=false
-    interval: 3600
-    path: ./mojie.yaml
     health-check:
       enable: true
       interval: 600
@@ -105,7 +96,6 @@ proxy-groups:
       - share1
       - liangyuandian
       - xishudingyue1
-      - mojie
     type: select
 rule-providers:
 #广告拦截             
