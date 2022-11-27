@@ -1,15 +1,15 @@
 ###  自建节点配置  ###
 proxies:
-  - name: 🇭🇰 香港_hy
+  - name: 🇭🇰 香港
     type: hysteria
-    server: hk1109.az.yjbzl.cn
+    server: hk1127.az.yjbzl.cn
     port: 9527
     auth_str: passwordisazhk233ha
     alpn: h3
     protocol: udp
-    up: 55
-    down: 88
-    sni: hk1109.az.yjbzl.cn
+    up: 33
+    down: 110
+    sni: hk1127.az.yjbzl.cn
     skip-cert-verify: false
   - name: 🇰🇷 韩国_hy
     type: hysteria
