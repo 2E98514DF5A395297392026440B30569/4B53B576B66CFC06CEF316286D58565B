@@ -14,14 +14,14 @@ proxies:
 #日本
   - name: 🇯🇵 日本
     type: hysteria
-    server: cd.jp1122.ln.yjbzl.cn
+    server: jp1127.ln.yjbzl.cn
     port: 9527
     auth_str: Bq7D8pQgedj72hgS
     alpn: h3
     protocol: udp
-    up: 11
-    down: 55
-    sni: cd.jp1122.ln.yjbzl.cn
+    up: 33
+    down: 88
+    sni: jp1127.ln.yjbzl.cn
     skip-cert-verify: false
  #德国
   - name: 🇩🇪 德国
