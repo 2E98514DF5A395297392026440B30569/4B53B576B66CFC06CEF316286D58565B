@@ -38,14 +38,14 @@ proxies:
   #美国
   - name: 🇺🇸 美国
     type: hysteria
-    server: www.yuji2022.cf
-    port: 22345
+    server: la1127.cc.yjbzl.cn
+    port: 9527
     auth_str: passwordisccyyds2333
     alpn: h3
     protocol: udp
     up: 33
-    down: 55
-    sni: www.yuji2022.cf
+    down: 88
+    sni: la1127.cc.yjbzl.cn
     skip-cert-verify: false
 proxy-groups:
   - name: 🔰 Proxy
