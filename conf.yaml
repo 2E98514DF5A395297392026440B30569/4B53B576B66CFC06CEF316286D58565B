@@ -1,4 +1,4 @@
-###  自建节点配置  ###
+###  clash自建节点配置  ###
 proxies:
   - name: 🇭🇰 香港
     type: hysteria
@@ -11,18 +11,8 @@ proxies:
     down: 110
     sni: hk1127.az.yjbzl.cn
     skip-cert-verify: false
-  - name: 🇰🇷 韩国_hy
-    type: hysteria
-    server: www.yuji2022.gq
-    port: 22345
-    auth_str: 147258369
-    alpn: h3
-    protocol: udp
-    up: 33
-    down: 55
-    sni: www.yuji2022.gq
-    skip-cert-verify: false
-  - name: 🇯🇵 日本_hy
+#日本
+  - name: 🇯🇵 日本
     type: hysteria
     server: cd.jp1122.ln.yjbzl.cn
     port: 9527
@@ -33,7 +23,8 @@ proxies:
     down: 55
     sni: cd.jp1122.ln.yjbzl.cn
     skip-cert-verify: false
-  - name: 🇩🇪 德国_hy
+ #德国
+  - name: 🇩🇪 德国
     type: hysteria
     server: hy.fr1113.ol.yjbzl.cn
     port: 9527
@@ -44,7 +35,8 @@ proxies:
     down: 88
     sni: hy.fr1113.ol.yjbzl.cn
     skip-cert-verify: false
-  - name: 🇺🇸 美国_hy
+  #美国
+  - name: 🇺🇸 美国
     type: hysteria
     server: www.yuji2022.cf
     port: 22345
@@ -59,7 +51,7 @@ proxy-groups:
   - name: 🔰 Proxy
     type: select
     proxies:
-      - 🇭🇰 香港_hy
+      - 🇭🇰 香港
 rules:
   - DOMAIN,googleapis.cn,🔰 Proxy
   - MATCH,🔰 Proxy
