@@ -11,7 +11,19 @@ proxies:
     down: 110
     sni: hk1127.az.yjbzl.cn
     skip-cert-verify: false
-#日本
+  - name: 🇭🇰 香港cdn
+    type: vmess
+    server: 13.225.102.6
+    port: "80"
+    uuid: a6a9c987-0292-451b-82ee-fff2a2b00f1d
+    alterId: "0"
+    cipher: auto
+    network: ws
+    ws-opts:
+      path: /a6a9c987-0292-451b-82ee-fff2a2b00f1d
+      headers:
+        Host: hk.cdn.yjbzl.cn
+    _index: 1
   - name: 🇯🇵 日本
     type: hysteria
     server: jp1127.ln.yjbzl.cn
@@ -23,7 +35,18 @@ proxies:
     down: 88
     sni: jp1127.ln.yjbzl.cn
     skip-cert-verify: false
- #德国
+  - name: 🇯🇵 日本cdn
+    type: vmess
+    server: 13.225.102.6
+    port: "80"
+    uuid: 21314dac-d346-43a4-9002-ab39fa18e36a
+    alterId: "0"
+    cipher: auto
+    network: ws
+    ws-opts:
+      path: /21314dac-d346-43a4-9002-ab39fa18e36a
+      headers:
+        Host: cdn.yuji2022.cf
   - name: 🇩🇪 德国
     type: hysteria
     server: hy.fr1113.ol.yjbzl.cn
@@ -35,7 +58,6 @@ proxies:
     down: 88
     sni: hy.fr1113.ol.yjbzl.cn
     skip-cert-verify: false
-  #美国
   - name: 🇺🇸 美国
     type: hysteria
     server: la1127.cc.yjbzl.cn
@@ -47,6 +69,30 @@ proxies:
     down: 88
     sni: la1127.cc.yjbzl.cn
     skip-cert-verify: false
+  - name: 🇺🇸 美国cdn
+    type: vmess
+    server: 13.225.102.6
+    port: "80"
+    uuid: 134bf972-0520-42b3-da4d-24333dff0dc3
+    alterId: "0"
+    cipher: auto
+    network: ws
+    ws-opts:
+      path: /134bf972-0520-42b3-da4d-24333dff0dc3
+      headers:
+        Host: cc.cdn.yjbzl.cn
+  - name: 🇺🇸 纽约cdn
+    type: vmess
+    server: 13.225.102.6
+    port: "80"
+    uuid: c45231f5-5872-4946-93e7-927d90a70b57
+    alterId: "0"
+    cipher: auto
+    network: ws
+    ws-opts:
+      path: /UZpFfslsyx6pv0DeCU2PP-1_l3WxdP8vLucTGdbrZ_IfxaYALBf5fYWYXleENta9lXxuVxATrNF1OU45FVGqLsfLWqRrOvQCVH9hWEL9l8FDQGv71QA1GC1Ct91GYYP9neJGRjhoe_ubM9lgdP77
+      headers:
+        Host: cdn.yj2022.cf
 proxy-groups:
   - name: 🔰 Proxy
     type: select
