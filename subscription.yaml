@@ -43,16 +43,8 @@ proxy-providers:
       enable: true
       interval: 600
       url: http://www.gstatic.com/generate_204
- #分享整合                       
-  share1:
-    type: http
-    url: https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/share/11.24.yml
-    interval: 3600
-    path: ./share1.yaml
-    health-check:
-      enable: true
-      interval: 600
-      url: http://www.gstatic.com/generate_204
+ #分享整合
+ 
 proxy-groups:
   - name: 🔰 Proxy
     type: select
@@ -84,7 +76,6 @@ proxy-groups:
   - name: 🍃 白嫖
     use:
       - openitsub
-      - share1
     type: select
 rule-providers:
 #广告拦截             
