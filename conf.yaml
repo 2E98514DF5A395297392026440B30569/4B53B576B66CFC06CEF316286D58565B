@@ -58,6 +58,18 @@ proxies:
     down: 88
     sni: hy.fr1113.ol.yjbzl.cn
     skip-cert-verify: false
+  - name: 🇩🇪 德国cdn
+    type: vmess
+    server: 13.225.102.6
+    port: "80"
+    uuid: 331a5f51-9863-44eb-ce72-e2616cca9ba0
+    alterId: "0"
+    cipher: auto
+    network: ws
+    ws-opts:
+      path: /xOwC49TUIazwkOFi5o0cUnNNWTcHMngTMaDnyrNrGdCARhPaoo9oUsfQn3jumxvqvm3t3WGcYbVSG1tch0YsJsAerk5Lxu3t
+      headers:
+        Host: ol.cdn.yj2022.cf
   - name: 🇺🇸 美国
     type: hysteria
     server: la1127.cc.yjbzl.cn
