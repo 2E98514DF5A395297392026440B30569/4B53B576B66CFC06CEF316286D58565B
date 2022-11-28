@@ -70,7 +70,7 @@ proxies:
       path: /xOwC49TUIazwkOFi5o0cUnNNWTcHMngTMaDnyrNrGdCARhPaoo9oUsfQn3jumxvqvm3t3WGcYbVSG1tch0YsJsAerk5Lxu3t
       headers:
         Host: ol.cdn.yj2022.cf
-  - name: 🇺🇸 美国
+  - name: 🇺🇸 洛杉矶
     type: hysteria
     server: la1127.cc.yjbzl.cn
     port: 9527
@@ -81,7 +81,7 @@ proxies:
     down: 88
     sni: la1127.cc.yjbzl.cn
     skip-cert-verify: false
-  - name: 🇺🇸 美国cdn
+  - name: 🇺🇸 洛杉矶cdn
     type: vmess
     server: 13.225.102.6
     port: "80"
