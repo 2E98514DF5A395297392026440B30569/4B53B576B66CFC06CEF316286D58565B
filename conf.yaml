@@ -11,7 +11,7 @@ proxies:
     down: 110
     sni: hk1127.az.yjbzl.cn
     skip-cert-verify: false
-  - name: 🇭🇰 香港cdn
+  - name: 🇭🇰 香港-cdn
     type: vmess
     server: 13.225.102.6
     port: "80"
@@ -23,7 +23,6 @@ proxies:
       path: /a6a9c987-0292-451b-82ee-fff2a2b00f1d
       headers:
         Host: hk.cdn.yjbzl.cn
-    _index: 1
   - name: 🇯🇵 日本
     type: hysteria
     server: jp1127.ln.yjbzl.cn
@@ -35,7 +34,17 @@ proxies:
     down: 88
     sni: jp1127.ln.yjbzl.cn
     skip-cert-verify: false
-  - name: 🇯🇵 日本cdn
+  - name: 🇯🇵 日本-中转
+    type: vmess
+    server: 183.245.7.190
+    port: "25586"
+    uuid: 21314dac-d346-43a4-9002-ab39fa18e36a
+    alterId: "0"
+    cipher: auto
+    network: ws
+    ws-opts:
+      path: /21314dac-d346-43a4-9002-ab39fa18e36a
+  - name: 🇯🇵 日本-cdn
     type: vmess
     server: 13.225.102.6
     port: "80"
@@ -47,6 +56,7 @@ proxies:
       path: /21314dac-d346-43a4-9002-ab39fa18e36a
       headers:
         Host: cdn.yuji2022.cf
+    _index: 3
   - name: 🇩🇪 德国
     type: hysteria
     server: hy.fr1113.ol.yjbzl.cn
@@ -58,7 +68,17 @@ proxies:
     down: 88
     sni: hy.fr1113.ol.yjbzl.cn
     skip-cert-verify: false
-  - name: 🇩🇪 德国cdn
+  - name: 🇩🇪 德国-中转
+    type: vmess
+    server: 183.245.7.190
+    port: "25576"
+    uuid: 331a5f51-9863-44eb-ce72-e2616cca9ba0
+    alterId: "0"
+    cipher: auto
+    network: ws
+    ws-opts:
+      path: /xOwC49TUIazwkOFi5o0cUnNNWTcHMngTMaDnyrNrGdCARhPaoo9oUsfQn3jumxvqvm3t3WGcYbVSG1tch0YsJsAerk5Lxu3t
+  - name: 🇩🇪 德国-cdn
     type: vmess
     server: 13.225.102.6
     port: "80"
@@ -81,7 +101,17 @@ proxies:
     down: 88
     sni: la1127.cc.yjbzl.cn
     skip-cert-verify: false
-  - name: 🇺🇸 洛杉矶cdn
+  - name: 🇺🇸 洛杉矶-中转
+    type: vmess
+    server: 183.245.7.190
+    port: "25575"
+    uuid: 134bf972-0520-42b3-da4d-24333dff0dc3
+    alterId: "0"
+    cipher: auto
+    network: ws
+    ws-opts:
+      path: /134bf972-0520-42b3-da4d-24333dff0dc3
+  - name: 🇺🇸 洛杉矶-cdn
     type: vmess
     server: 13.225.102.6
     port: "80"
@@ -93,7 +123,17 @@ proxies:
       path: /134bf972-0520-42b3-da4d-24333dff0dc3
       headers:
         Host: cc.cdn.yjbzl.cn
-  - name: 🇺🇸 纽约cdn
+  - name: 🇺🇸 纽约-中转
+    type: vmess
+    server: 183.245.7.190
+    port: "25587"
+    uuid: c45231f5-5872-4946-93e7-927d90a70b57
+    alterId: "0"
+    cipher: auto
+    network: ws
+    ws-opts:
+      path: /UZpFfslsyx6pv0DeCU2PP-1_l3WxdP8vLucTGdbrZ_IfxaYALBf5fYWYXleENta9lXxuVxATrNF1OU45FVGqLsfLWqRrOvQCVH9hWEL9l8FDQGv71QA1GC1Ct91GYYP9neJGRjhoe_ubM9lgdP77
+  - name: 🇺🇸 纽约-cdn
     type: vmess
     server: 13.225.102.6
     port: "80"
@@ -105,6 +145,7 @@ proxies:
       path: /UZpFfslsyx6pv0DeCU2PP-1_l3WxdP8vLucTGdbrZ_IfxaYALBf5fYWYXleENta9lXxuVxATrNF1OU45FVGqLsfLWqRrOvQCVH9hWEL9l8FDQGv71QA1GC1Ct91GYYP9neJGRjhoe_ubM9lgdP77
       headers:
         Host: cdn.yj2022.cf
+    _index: 11
 proxy-groups:
   - name: 🔰 Proxy
     type: select
