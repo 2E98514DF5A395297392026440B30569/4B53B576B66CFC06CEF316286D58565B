@@ -11,6 +11,16 @@ proxies:
     down: 110
     sni: hk1127.az.yjbzl.cn
     skip-cert-verify: false
+  - name: 🇭🇰 香港-中转
+    type: vmess
+    server: 183.245.7.190
+    port: "25588"
+    uuid: a6a9c987-0292-451b-82ee-fff2a2b00f1d
+    alterId: "0"
+    cipher: auto
+    network: ws
+    ws-opts:
+      path: /a6a9c987-0292-451b-82ee-fff2a2b00f1d
   - name: 🇭🇰 香港-cdn
     type: vmess
     server: 13.225.102.6
@@ -23,6 +33,7 @@ proxies:
       path: /a6a9c987-0292-451b-82ee-fff2a2b00f1d
       headers:
         Host: hk.cdn.yjbzl.cn
+    _index: 1
   - name: 🇯🇵 日本
     type: hysteria
     server: jp1127.ln.yjbzl.cn
