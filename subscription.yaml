@@ -42,7 +42,7 @@ proxy-groups:
       - ♻ 自动选择
       - 🔯 故障转移
       - 🔮 负载均衡
-      - 🍃 白嫖
+#      - 🍃 白嫖
     use:
       - vps
   - name: ♻ 自动选择
@@ -63,10 +63,7 @@ proxy-groups:
     type: load-balance
     url: https://www.gstatic.com/generate_204
     interval: "300"
-  - name: 🍃 白嫖
-    use:
-      - openitsub
-    type: select
+#  - name: 🍃 白嫖
 rule-providers:
 #广告拦截             
   BanAD:
