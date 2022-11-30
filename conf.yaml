@@ -20,7 +20,7 @@ proxies:
     cipher: auto
     network: ws
     ws-opts:
-      path: /a6a9c987-0292-451b-82ee-fff2a2b00f1d
+      path: /0a6a9c987-0292-451b-82ee-fff2a2b00f1d
   - name: 🇭🇰 香港-cdn
     type: vmess
     server: 13.225.102.6
@@ -30,7 +30,7 @@ proxies:
     cipher: auto
     network: ws
     ws-opts:
-      path: /a6a9c987-0292-451b-82ee-fff2a2b00f1d
+      path: /0a6a9c987-0292-451b-82ee-fff2a2b00f1d
       headers:
         Host: hk.cdn.yjbzl.cn
     _index: 1
@@ -54,7 +54,7 @@ proxies:
     cipher: auto
     network: ws
     ws-opts:
-      path: /21314dac-d346-43a4-9002-ab39fa18e36a
+      path: /021314dac-d346-43a4-9002-ab39fa18e36a
   - name: 🇯🇵 日本-cdn
     type: vmess
     server: 13.225.102.6
@@ -64,7 +64,7 @@ proxies:
     cipher: auto
     network: ws
     ws-opts:
-      path: /21314dac-d346-43a4-9002-ab39fa18e36a
+      path: /021314dac-d346-43a4-9002-ab39fa18e36a
       headers:
         Host: cdn.yuji2022.cf
     _index: 3
@@ -88,7 +88,7 @@ proxies:
     cipher: auto
     network: ws
     ws-opts:
-      path: /xOwC49TUIazwkOFi5o0cUnNNWTcHMngTMaDnyrNrGdCARhPaoo9oUsfQn3jumxvqvm3t3WGcYbVSG1tch0YsJsAerk5Lxu3t
+      path: /0xOwC49TUIazwkOFi5o0cUnNNWTcHMngTMaDnyrNrGdCARhPaoo9oUsfQn3jumxvqvm3t3WGcYbVSG1tch0YsJsAerk5Lxu3t
   - name: 🇩🇪 德国-cdn
     type: vmess
     server: 13.225.102.6
@@ -98,7 +98,7 @@ proxies:
     cipher: auto
     network: ws
     ws-opts:
-      path: /xOwC49TUIazwkOFi5o0cUnNNWTcHMngTMaDnyrNrGdCARhPaoo9oUsfQn3jumxvqvm3t3WGcYbVSG1tch0YsJsAerk5Lxu3t
+      path: /0xOwC49TUIazwkOFi5o0cUnNNWTcHMngTMaDnyrNrGdCARhPaoo9oUsfQn3jumxvqvm3t3WGcYbVSG1tch0YsJsAerk5Lxu3t
       headers:
         Host: ol.cdn.yj2022.cf
   - name: 🇺🇸 洛杉矶
@@ -121,7 +121,7 @@ proxies:
     cipher: auto
     network: ws
     ws-opts:
-      path: /134bf972-0520-42b3-da4d-24333dff0dc3
+      path: /0134bf972-0520-42b3-da4d-24333dff0dc3
   - name: 🇺🇸 洛杉矶-cdn
     type: vmess
     server: 13.225.102.6
@@ -131,7 +131,7 @@ proxies:
     cipher: auto
     network: ws
     ws-opts:
-      path: /134bf972-0520-42b3-da4d-24333dff0dc3
+      path: /0134bf972-0520-42b3-da4d-24333dff0dc3
       headers:
         Host: cc.cdn.yjbzl.cn
   - name: 🇺🇸 纽约-中转
@@ -143,7 +143,7 @@ proxies:
     cipher: auto
     network: ws
     ws-opts:
-      path: /UZpFfslsyx6pv0DeCU2PP-1_l3WxdP8vLucTGdbrZ_IfxaYALBf5fYWYXleENta9lXxuVxATrNF1OU45FVGqLsfLWqRrOvQCVH9hWEL9l8FDQGv71QA1GC1Ct91GYYP9neJGRjhoe_ubM9lgdP77
+      path: /0UZpFfslsyx6pv0DeCU2PP-1_l3WxdP8vLucTGdbrZ_IfxaYALBf5fYWYXleENta9lXxuVxATrNF1OU45FVGqLsfLWqRrOvQCVH9hWEL9l8FDQGv71QA1GC1Ct91GYYP9neJGRjhoe_ubM9lgdP77
   - name: 🇺🇸 纽约-cdn
     type: vmess
     server: 13.225.102.6
@@ -153,7 +153,7 @@ proxies:
     cipher: auto
     network: ws
     ws-opts:
-      path: /UZpFfslsyx6pv0DeCU2PP-1_l3WxdP8vLucTGdbrZ_IfxaYALBf5fYWYXleENta9lXxuVxATrNF1OU45FVGqLsfLWqRrOvQCVH9hWEL9l8FDQGv71QA1GC1Ct91GYYP9neJGRjhoe_ubM9lgdP77
+      path: /0UZpFfslsyx6pv0DeCU2PP-1_l3WxdP8vLucTGdbrZ_IfxaYALBf5fYWYXleENta9lXxuVxATrNF1OU45FVGqLsfLWqRrOvQCVH9hWEL9l8FDQGv71QA1GC1Ct91GYYP9neJGRjhoe_ubM9lgdP77
       headers:
         Host: cdn.yj2022.cf
     _index: 11
