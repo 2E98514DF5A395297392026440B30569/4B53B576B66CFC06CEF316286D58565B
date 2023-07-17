@@ -1,0 +1,16 @@
+# 直连软件
+# 企业微信、微软应用、牛卖浏览器、shopeeman、utools、maye、Todesk、字体助手，rustdesk、雷蛇
+PROCESS-NAME,WXWork.exe
+PROCESS-NAME,svchost.exe
+PROCESS-NAME,HitoorBrowser
+PROCESS-NAME,ShopeeNative
+PROCESS-NAME,uTools.exe
+PROCESS-NAME,Maye.exe
+PROCESS-NAME,ToDesk.exe
+PROCESS-NAME,iFonts字体助手.exe
+PROCESS-NAME,rustdesk.exe
+PROCESS-NAME,CefSharp.BrowserSubprocess.exe
+
+# 虾皮、旺销王
+DOMAIN-KEYWORD,shopee
+DOMAIN-SUFFIX,wxwerp.com
