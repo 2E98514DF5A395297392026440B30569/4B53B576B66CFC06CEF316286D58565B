@@ -14,3 +14,8 @@ PROCESS-NAME,CefSharp.BrowserSubprocess.exe
 # 虾皮、旺销王
 DOMAIN-KEYWORD,shopee
 DOMAIN-SUFFIX,wxwerp.com
+# 财付通、拼多多x2
+DOMAIN-SUFFIX,91cyt.com
+DOMAIN-SUFFIX,yangkeduo.com
+DOMAIN-SUFFIX,pddpic.com
+
