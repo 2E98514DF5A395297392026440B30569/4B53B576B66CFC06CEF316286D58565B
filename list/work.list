@@ -10,7 +10,7 @@ PROCESS-NAME,ToDesk.exe
 PROCESS-NAME,iFonts字体助手.exe
 PROCESS-NAME,rustdesk.exe
 PROCESS-NAME,CefSharp.BrowserSubprocess.exe
-PROCESS-NAME,Notion
+PROCESS-NAME,Notion.exe
 
 # 虾皮、旺销王
 DOMAIN-KEYWORD,shopee
