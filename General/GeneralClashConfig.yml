@@ -66,7 +66,7 @@ dns:
   enable: true # 是否启用dns false
   ipv6: false
   default-nameserver:
-    - 114.114.114.114
+#    - 114.114.114.114
     - 223.5.5.5
     - 119.29.29.29
   #listen: 0.0.0.0:53
@@ -85,7 +85,7 @@ dns:
      - 180.76.76.76 # 百度DNS
      - 117.50.11.11 # ONE DNS拦截版 恶意网站拦截、广告过滤
      - 117.50.10.10 # ONE DNS纯净版 直接返回其真实的响应结果
-     - 114.114.114.114 # 114DNS
+#     - 114.114.114.114 # 114DNS
      - https://doh.360.cn/dns-query # 360 DoH DNS
   fallback:
      - 8.8.8.8 # 谷歌DNS
@@ -148,7 +148,7 @@ dns:
 # Clash for Windows
 # Proxies module latency test settings
 cfw-latency-timeout: 3000
-cfw-latency-url: http://www.gstatic.com/generate_204
+cfw-latency-url: http://www.google.com/generate_204
 
 # 混合配置（mixin）
 # 支持向所有配置文件中注入公共属性设置
