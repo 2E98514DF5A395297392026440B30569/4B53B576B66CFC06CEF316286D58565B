@@ -22,7 +22,8 @@ allow-lan: false
 # #192.168.122.11: 绑定单个IPv4地址
 # #"[aaaa::a8aa:ff:fe09:57d8]": 绑定单个IPv6地址
 bind-address: "*"
-ipv6: false
+
+ipv6: false #禁用ipv6
 
 # 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）/ script (脚本)
 mode: rule
@@ -53,6 +54,7 @@ experimental:
 # 本地 SOCKS5 / HTTP(S) 服务认证
 authentication:
   - "clash:clash"
+  - "naruto:naruto"
 #  - "user2:pass2"
 
 # 实验性功能 hosts, 支持通配符 (例如 *.clash.dev 甚至 *.foo.*.example.com)
@@ -63,7 +65,7 @@ authentication:
 #   'alpha.clash.dev': '::1'
 
 dns:
-  enable: true # 是否启用dns false
+  enable: true # 是否启用dns
   ipv6: false
   default-nameserver:
 #    - 114.114.114.114 # 114 DNS 很多地方用不了
