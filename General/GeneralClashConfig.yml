@@ -68,10 +68,10 @@ dns:
   enable: true # 是否启用dns
   ipv6: false
   default-nameserver:
-    - dhcp://system
-    - 114.114.114.114 # 114 DNS 很多地方用不了
+#   - dhcp://system 用不了，会报错
     - 223.5.5.5 # 阿里 DNS1
     - 223.6.6.6 # 阿里 DNS2
+    - 114.114.114.114 # 114 DNS 很多地方用不了
     - 119.29.29.29 # 腾讯 DNS
     - 180.76.76.76 # 百度 DNS
     - 180.184.1.1 # 字节跳动 TrafficRoute DNS
@@ -85,10 +85,10 @@ dns:
     - '*.lan'
     - localhost.ptlogin2.qq.com
   nameserver: #只有国内网站才会查询
-    - dhcp://system
-    - 114.114.114.114 # 114 DNS 很多地方用不了
+#   - dhcp://system 用不了，会报错
     - 223.5.5.5 # 阿里 DNS1
     - 223.6.6.6 # 阿里 DNS2
+    - 114.114.114.114 # 114 DNS 很多地方用不了
     - 119.29.29.29 # 腾讯 DNS
     - 180.76.76.76 # 百度 DNS
     - 180.184.1.1 # 字节跳动 TrafficRoute DNS
@@ -103,12 +103,12 @@ dns:
   fallback:
     - 8.8.8.8 # 谷歌DNS
     - 1.1.1.1 # Cloudflare DNS
-   #  - https://dns.google/dns-query # 谷歌 DoH DNS
-   #  - tls://dns.google:853 # 谷歌 DoT DNS
-   #  - https://cloudflare-dns.com/dns-query # Cloudflare DoH DNS
-   #  - tls://1.0.0.1:853 # Cloudflare DoT DNS
-   #  - https://dns.rubyfish.cn/dns-query 
-   #  - tls://dns.rubyfish.cn:853
+#   - https://dns.google/dns-query # 谷歌 DoH DNS
+#   - tls://dns.google:853 # 谷歌 DoT DNS
+#   - https://cloudflare-dns.com/dns-query # Cloudflare DoH DNS
+#   - tls://1.0.0.1:853 # Cloudflare DoT DNS
+#   - https://dns.rubyfish.cn/dns-query 
+#   - tls://dns.rubyfish.cn:853
   fallback-filter:
      geoip: true # 默认
      geoip-code: CN
