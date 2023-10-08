@@ -79,7 +79,7 @@ dns:
 #    - 1.2.4.8 # CNNIC DNS
 #    - 117.50.11.11 # ONE DNS拦截版 恶意网站拦截、广告过滤
 #    - 117.50.10.10 # ONE DNS纯净版 直接返回其真实的响应结果
-#  listen: 127.0.0.1:5353 
+  listen: 127.0.0.1:5353 
   enhanced-mode: fake-ip # 模式：redir-host或fake-ip
   fake-ip-range: 198.18.0.1/16 #
   fake-ip-filter: # 不进行fake ip的域名
