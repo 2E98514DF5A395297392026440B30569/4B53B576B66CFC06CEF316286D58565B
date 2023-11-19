@@ -85,29 +85,29 @@ rule-providers:
 
   OpenAi:
     type: http
-    behavior: classical
+    behavior: domain
     url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/OpenAi.yaml
     path: ./ruleset/OpenAi.yaml
     interval: 86400
 
   YouTube:
     type: http
-    behavior: classical
-    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/YouTube.yaml
+    behavior: domain
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/YouTube.yaml
     path: ./ruleset/YouTube.yaml
     interval: 86400
 
   TikTok:
     type: http
-    behavior: classical
-    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/TikTok.yaml
+    behavior: domain
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/TikTok.yaml
     path: ./ruleset/TikTok.yaml
     interval: 86400
 
   DisneyPlus:
     type: http
-    behavior: classical
-    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/DisneyPlus.yaml
+    behavior: domain
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/DisneyPlus.yaml
     path: ./ruleset/DisneyPlus.yaml
     interval: 86400
 
@@ -127,8 +127,8 @@ rule-providers:
 
   Bahamut:
     type: http
-    behavior: classical
-    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Bahamut.yaml
+    behavior: domain
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/Bahamut.yaml
     path: ./ruleset/Bahamut.yaml
     interval: 86400
 
@@ -155,8 +155,8 @@ rule-providers:
 
   Steam:
     type: http
-    behavior: classical
-    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Steam.yaml
+    behavior: domain
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/Steam.yaml
     path: ./ruleset/Steam.yaml
     interval: 86400
 
