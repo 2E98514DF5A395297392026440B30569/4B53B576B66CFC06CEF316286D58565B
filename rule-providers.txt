@@ -1,0 +1,175 @@
+rule-providers:
+  GoogleFCM:
+    type: http
+    behavior: classical
+    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleFCM.yaml
+    path: ./ruleset/GoogleFCM.yaml
+    interval: 86400
+
+  GoogleCN:
+    type: http
+    behavior: classical
+    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleCN.yaml
+    path: ./ruleset/GoogleCN.yaml
+    interval: 86400
+
+  LocalAreaNetwork:
+    type: http
+    behavior: classical
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/LocalAreaNetwork.yaml
+    path: ./ruleset/LocalAreaNetwork.yaml
+    interval: 86400
+
+  ChinaIp:
+    type: http
+    behavior: ipcidr
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/ChinaIp.yaml
+    path: ./ruleset/ChinaIp.yaml
+    interval: 86400
+
+  ChinaIpV6:
+    type: http
+    behavior: ipcidr
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/ChinaIpV6.yaml
+    path: ./ruleset/ChinaIpV6.yaml
+    interval: 86400 
+
+  ChinaDomain:
+    type: http
+    behavior: domain
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/ChinaDomain.yaml
+    path: ./ruleset/ChinaDomain.yaml
+    interval: 86400
+
+  ChinaMedia:
+    type: http
+    behavior: classical
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/ChinaMedia.yaml
+    path: ./ruleset/ChinaMedia.yaml
+    interval: 86400
+
+  ChinaCompanyIp:
+    type: http
+    behavior: ipcidr
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/ChinaCompanyIp.yaml
+    path: ./ruleset/ChinaCompanyIp.yaml
+    interval: 86400
+
+  SteamCN:
+    type: http
+    behavior: domain
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/SteamCN.yaml
+    path: ./ruleset/SteamCN.yaml
+    interval: 86400
+
+  add:
+    type: http
+    behavior: classical
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/add.yaml
+    path: ./ruleset/add.yaml
+    interval: 86400
+
+  GeoIP2-CN_IP:
+    type: http
+    behavior: ipcidr
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/GeoIP2-CN_IP.yaml
+    path: ./ruleset/GeoIP2-CN_IP.yaml
+    interval: 86400
+
+  Telegram:
+    type: http
+    behavior: classical
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/Telegram.yaml
+    path: ./ruleset/Telegram.yaml
+    interval: 86400
+
+  OpenAi:
+    type: http
+    behavior: domain
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/OpenAi.yaml
+    path: ./ruleset/OpenAi.yaml
+    interval: 86400
+
+  YouTube:
+    type: http
+    behavior: domain
+    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/YouTube.yaml
+    path: ./ruleset/YouTube.yaml
+    interval: 86400
+
+  TikTok:
+    type: http
+    behavior: domain
+    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/TikTok.yaml
+    path: ./ruleset/TikTok.yaml
+    interval: 86400
+
+  DisneyPlus:
+    type: http
+    behavior: domain
+    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/DisneyPlus.yaml
+    path: ./ruleset/DisneyPlus.yaml
+    interval: 86400
+
+  Netflix:
+    type: http
+    behavior: classical
+    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Netflix.yaml
+    path: ./ruleset/Netflix.yaml
+    interval: 86400
+
+  NetflixIP:
+    type: http
+    behavior: ipcidr
+    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/NetflixIP.yaml
+    path: ./ruleset/NetflixIP.yaml
+    interval: 86400
+
+  Bahamut:
+    type: http
+    behavior: domain
+    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Bahamut.yaml
+    path: ./ruleset/Bahamut.yaml
+    interval: 86400
+
+  ProxyMedia:
+    type: http
+    behavior: domain
+    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyMedia.yaml
+    path: ./ruleset/ProxyMedia.yaml
+    interval: 86400
+
+  Google:
+    type: http
+    behavior: classical
+    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Google.yaml
+    path: ./ruleset/Google.yaml
+    interval: 86400
+
+  ProxyGFWlist:
+    type: http
+    behavior: classical
+    url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/ProxyGFWlist.yaml
+    path: ./ruleset/ProxyGFWlist.yaml
+    interval: 86400
+
+  Steam:
+    type: http
+    behavior: domain
+    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Steam.yaml
+    path: ./ruleset/Steam.yaml
+    interval: 86400
+
+  GoogleCNProxyIP:
+    type: http
+    behavior: ipcidr
+    url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/GoogleCNProxyIP.yaml
+    path: ./ruleset/GoogleCNProxyIP.yaml
+    interval: 86400
+
+  修改:
+    type: http
+    behavior: domain ipcidr classical
+    url: https://ghproxy.com/修改
+    path: ./ruleset/修改.yaml
+    interval: 86400
