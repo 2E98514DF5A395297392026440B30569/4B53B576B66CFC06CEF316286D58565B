@@ -36,7 +36,7 @@ rule-providers:
 
   ChinaDomain:
     type: http
-    behavior: domain
+    behavior: classical
     url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/ChinaDomain.yaml
     path: ./ruleset/ChinaDomain.yaml
     interval: 86400
@@ -57,7 +57,7 @@ rule-providers:
 
   SteamCN:
     type: http
-    behavior: domain
+    behavior: classical
     url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/SteamCN.yaml
     path: ./ruleset/SteamCN.yaml
     interval: 86400
@@ -85,28 +85,28 @@ rule-providers:
 
   OpenAi:
     type: http
-    behavior: domain
+    behavior: classical
     url: https://ghproxy.com/https://raw.githubusercontent.com/2E98514DF5A395297392026440B30569/4B53B576B66CFC06CEF316286D58565B/main/rule-set/OpenAi.yaml
     path: ./ruleset/OpenAi.yaml
     interval: 86400
 
   YouTube:
     type: http
-    behavior: domain
+    behavior: classical
     url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/YouTube.yaml
     path: ./ruleset/YouTube.yaml
     interval: 86400
 
   TikTok:
     type: http
-    behavior: domain
+    behavior: classical
     url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/TikTok.yaml
     path: ./ruleset/TikTok.yaml
     interval: 86400
 
   DisneyPlus:
     type: http
-    behavior: domain
+    behavior: classical
     url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/DisneyPlus.yaml
     path: ./ruleset/DisneyPlus.yaml
     interval: 86400
@@ -127,14 +127,14 @@ rule-providers:
 
   Bahamut:
     type: http
-    behavior: domain
+    behavior: classical
     url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Bahamut.yaml
     path: ./ruleset/Bahamut.yaml
     interval: 86400
 
   ProxyMedia:
     type: http
-    behavior: domain
+    behavior: classical
     url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/ProxyMedia.yaml
     path: ./ruleset/ProxyMedia.yaml
     interval: 86400
@@ -155,7 +155,7 @@ rule-providers:
 
   Steam:
     type: http
-    behavior: domain
+    behavior: classical
     url: https://ghproxy.com/https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Steam.yaml
     path: ./ruleset/Steam.yaml
     interval: 86400
