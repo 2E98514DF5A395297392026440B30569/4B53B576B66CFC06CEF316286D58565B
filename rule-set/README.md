@@ -4,5 +4,5 @@
 ```
 - 匹配ip的规则集替换为无
 ```
-(IP-CIDR,)|(,no-resolve)
+(IP-CIDR,)|(IP-CIDR6,)|(,no-resolve)
 ```
