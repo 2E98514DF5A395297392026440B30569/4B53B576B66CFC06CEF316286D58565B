@@ -1,0 +1,52 @@
+rules:
+# 优先代理
+  - DOMAIN,suc.narutos.top,DIRECT
+  - DOMAIN,suc2.narutos.top,DIRECT
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🚀 节点选择
+  - DOMAIN,services.googleapis.cn,🚀 节点选择
+
+# 谷歌服务代理
+  - RULE-SET,GoogleFCM,🚀 节点选择
+  - RULE-SET,GoogleCN,🚀 节点选择
+
+# 局域网直连
+  - RULE-SET,LocalAreaNetwork,DIRECT
+
+# 中国ip/域名直连
+  - RULE-SET,ChinaIp,🎯 全球直连
+  - RULE-SET,ChinaIpV6,🎯 全球直连
+  - RULE-SET,ChinaDomain,🎯 全球直连
+  - RULE-SET,ChinaMedia,🎯 全球直连
+  - RULE-SET,ChinaCompanyIp,🎯 全球直连
+
+# 大厂直连
+  - RULE-SET,SteamCN,🎯 全球直连
+
+# 补充规则
+  - RULE-SET,add,🎯 全球直连
+  - RULE-SET,GeoIP2-CN_IP,🎯 全球直连
+
+# 国外规则
+  - RULE-SET,Telegram,📠 Telegram
+  - RULE-SET,OpenAi,🤖 ChatGPT
+  - RULE-SET,YouTube,💒 YouTube
+  - RULE-SET,TikTok,🎥 TikTok
+  - RULE-SET,DisneyPlus,📺 Disney
+  - RULE-SET,Netflix,🔥 Netflix
+  - RULE-SET,NetflixIP,🔥 Netflix
+
+# 国外媒体
+  - RULE-SET,Bahamut,🌍 国外媒体
+  - RULE-SET,ProxyMedia,🌍 国外媒体
+
+# 默认代理
+  - RULE-SET,Google,🚀 节点选择
+  - RULE-SET,ProxyGFWlist,🚀 节点选择
+  - RULE-SET,Steam,🚀 节点选择
+  - RULE-SET,GoogleCNProxyIP,🚀 节点选择
+
+# 最后直连
+  - GEOIP,LAN,DIRECT,no-resolve
+  - GEOIP,CN,🎯 全球直连,no-resolve
+  - MATCH,🐟 漏网之鱼
+#  - RULE-SET,规则集,代理
