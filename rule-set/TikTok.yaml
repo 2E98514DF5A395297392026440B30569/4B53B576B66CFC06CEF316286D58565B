@@ -1,0 +1,14 @@
+payload:
+  # 内容：TikTok
+  # 数量：11条
+  # USER-AGENT,TikTok*
+  - '+.tiktokcdn'
+  - '+.byteoversea.com'
+  - '+.ibytedtos.com'
+  - '+.ipstatp.com'
+  - '+.muscdn.com'
+  - '+.musical.ly'
+  - '+.tik-tokapi.com'
+  - '+.tiktok.com'
+  - '+.tiktokcdn.com'
+  - '+.tiktokv.com'
