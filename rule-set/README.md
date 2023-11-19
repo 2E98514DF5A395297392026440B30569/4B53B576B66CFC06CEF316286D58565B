@@ -6,3 +6,7 @@
 ```
 (IP-CIDR,)|(IP-CIDR6,)|(,no-resolve)
 ```
+- 匹配域名的规则集替换为+
+```
+(DOMAIN-SUFFIX,)|(DOMAINX,)|(DOMAIN-KEYWORD,)
+```
