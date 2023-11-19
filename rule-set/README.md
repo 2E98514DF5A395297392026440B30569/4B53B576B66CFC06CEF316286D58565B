@@ -8,5 +8,5 @@
 ```
 - 匹配域名的规则集替换为+
 ```
-(DOMAIN-SUFFIX,)|(DOMAINX,)|(DOMAIN-KEYWORD,)
+(DOMAIN-SUFFIX,)|(DOMAIN-KEYWORD,)
 ```
