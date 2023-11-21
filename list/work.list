@@ -9,8 +9,12 @@ PROCESS-NAME,Maye.exe
 PROCESS-NAME,ToDesk.exe
 PROCESS-NAME,iFonts字体助手.exe
 PROCESS-NAME,rustdesk.exe
-PROCESS-NAME,CefSharp.BrowserSubprocess.exe
+
+# PROCESS-NAME,CefSharp.BrowserSubprocess.exe 这个不建议直连，因为有很多程序都会使用它
+
 PROCESS-NAME,Notion.exe
+
+# 微软浏览器
 PROCESS-NAME,msedge.exe
 
 # 虾皮、旺销王
