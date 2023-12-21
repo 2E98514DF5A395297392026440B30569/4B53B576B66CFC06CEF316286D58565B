@@ -24,3 +24,6 @@ DOMAIN-SUFFIX,wxwerp.com
 DOMAIN-SUFFIX,91cyt.com
 DOMAIN-SUFFIX,91miaoshou.com
 
+# ushop
+PROCESS-NAME,davinbrowser.exe
+
