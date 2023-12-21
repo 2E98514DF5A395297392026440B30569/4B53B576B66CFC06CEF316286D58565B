@@ -10,6 +10,9 @@ PROCESS-NAME,ToDesk.exe
 PROCESS-NAME,iFonts字体助手.exe
 PROCESS-NAME,rustdesk.exe
 
+# ushop
+PROCESS-NAME,davinbrowser.exe
+
 # PROCESS-NAME,CefSharp.BrowserSubprocess.exe 这个不建议直连，因为有很多程序都会使用它
 
 PROCESS-NAME,Notion.exe
@@ -24,6 +27,5 @@ DOMAIN-SUFFIX,wxwerp.com
 DOMAIN-SUFFIX,91cyt.com
 DOMAIN-SUFFIX,91miaoshou.com
 
-# ushop
-PROCESS-NAME,davinbrowser.exe
+
 
