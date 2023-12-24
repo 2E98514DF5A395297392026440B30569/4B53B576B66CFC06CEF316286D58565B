@@ -6,6 +6,10 @@
 
 DOMAIN,services.googleapis.cn
 DOMAIN-SUFFIX,android.clients.google.com
+DOMAIN-SUFFIX,mtalk.google.com
+DOMAIN-SUFFIX,safebrowsing-cache.google.com
+DOMAIN-SUFFIX,settings.crashlytics.com
+DOMAIN-SUFFIX,toolbarqueries.google.com
 
 DOMAIN-KEYWORD,gmail
 #DOMAIN-KEYWORD,google
