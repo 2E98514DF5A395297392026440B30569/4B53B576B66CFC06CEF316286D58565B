@@ -3,6 +3,9 @@
 # Google
 # 内容：Google
 # 数量：24条
+
+DOMAIN,services.googleapis.cn
+
 DOMAIN-KEYWORD,gmail
 #DOMAIN-KEYWORD,google
 DOMAIN-SUFFIX,1e100.net
