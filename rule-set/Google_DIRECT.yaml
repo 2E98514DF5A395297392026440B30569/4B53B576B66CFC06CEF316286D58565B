@@ -1,5 +1,4 @@
 payload:
-  - DOMAIN,services.googleapis.cn
   - DOMAIN,connectivitycheck.gstatic.com
   - DOMAIN-SUFFIX,265.com
   - DOMAIN-SUFFIX,2mdn.net
