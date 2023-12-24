@@ -5,6 +5,7 @@
 # 数量：24条
 
 DOMAIN,services.googleapis.cn
+DOMAIN-SUFFIX,android.clients.google.com
 
 DOMAIN-KEYWORD,gmail
 #DOMAIN-KEYWORD,google
