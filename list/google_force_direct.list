@@ -18,7 +18,6 @@ DOMAIN-SUFFIX,app-measurement.com
 DOMAIN-SUFFIX,beacons.gcp.gvt2.com
 DOMAIN-SUFFIX,beacons.gvt2.com
 DOMAIN-SUFFIX,beacons3.gvt2.com
-DOMAIN-SUFFIX,android.clients.google.com
 DOMAIN-SUFFIX,checkin.gstatic.com
 DOMAIN-SUFFIX,clientservices.googleapis.com
 DOMAIN-SUFFIX,connectivitycheck.gstatic.com
