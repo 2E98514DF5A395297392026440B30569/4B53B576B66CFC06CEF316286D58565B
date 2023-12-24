@@ -1,7 +1,7 @@
 # 来源：https://www.0z.gs/android/2077.html
 # 需要保证强制直连的域名：
 #
-DOMAIN,services.googleapis.cn
+
 DOMAIN,connectivitycheck.gstatic.com
 #
 DOMAIN-SUFFIX,265.com
