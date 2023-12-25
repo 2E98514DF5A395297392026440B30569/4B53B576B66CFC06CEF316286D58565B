@@ -1,0 +1,15 @@
+DOMAIN,dns.google.com
+DOMAIN,google.com
+DOMAIN,www.google.ru
+DOMAIN,www.google.com
+DOMAIN,firebaseremoteconfig.googleapis.com
+DOMAIN,prod.brass.cloud.cupronickel.goog
+DOMAIN,phosphor-pa.googleapis.com
+DOMAIN,connectivitycheck.gstatic.com
+
+; 可能有用的
+DOMAIN,assouth.p.g-tun.com
+DOMAIN,prod.zinc.cloud.cupronickel.goog
+DOMAIN-SUFFIX,accounts.google.com
+DOMAIN-SUFFIX,cloud.cupronickel.goog
+DOMAIN-SUFFIX,googleapis.com
