@@ -20,7 +20,7 @@ dns:
 proxy-providers:
   vps:
     type: http
-    url: https://raw.githubusercontent.com/yujibuzailai2022/vps_clash_proxies/main/conf.yaml
+    url: https://raw.githubusercontent.com/xxxxxxxx/vps_clash_proxies/main/conf.yaml
     interval: 86400
     path: ./vps.yaml
     health-check:
