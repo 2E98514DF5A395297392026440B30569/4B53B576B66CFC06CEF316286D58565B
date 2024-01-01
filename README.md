@@ -9,6 +9,7 @@ proxy-groups:
     proxies:
       - 🚀 三星_SOCKS
       - 🚀 三星_HTTP
+
   - name: 🔮 负载均衡-轮询
     type: load-balance
     strategy: round-robin
@@ -18,6 +19,7 @@ proxy-groups:
     proxies:
       - 🚀 三星_SOCKS
       - 🚀 三星_HTTP
+
   - name: ♻️ Relay
     type: relay
     proxies:
