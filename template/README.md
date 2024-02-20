@@ -1,15 +1,7 @@
 # nekobox规则
 
-![](./1.png)
-
-;prod.brass.cloud.cupronickel.goog
-;prod.zinc.cloud.cupronickel.goog
-;domain:cloud.cupronickel.goog
-;domain:googleapis.com
-;assouth.p.g-tun.com 这个可以删除试试，按理说安卓是不需要这个域名走代理的
-;最后直连：port 0:65535,绕过
-
 ## 代理
+
 - 精确匹配认证，2023_12_22测试有效
 
 ```
@@ -39,3 +31,6 @@ domain:googleapis.com
 ```
 port 0:65535
 ```
+
+![](./1.png)
+
