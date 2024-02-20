@@ -1,4 +1,4 @@
-# nekobox规则
+# [nekobox](https://github.com/MatsuriDayo/NekoBoxForAndroid)规则
 
 ## 代理
 
