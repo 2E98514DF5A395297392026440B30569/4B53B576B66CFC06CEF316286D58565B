@@ -1,4 +1,7 @@
 # nekobox规则
+
+![](./1.png)
+
 ;prod.brass.cloud.cupronickel.goog
 ;prod.zinc.cloud.cupronickel.goog
 ;domain:cloud.cupronickel.goog
