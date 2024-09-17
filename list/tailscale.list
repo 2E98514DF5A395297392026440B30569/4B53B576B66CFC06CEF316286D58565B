@@ -1,0 +1,17 @@
+# tailscale 地址
+# 参考：https://tailscale.com/kb/1105/other-vpns
+
+IP-CIDR,100.64.0.0/10,no-resolve
+IP-CIDR,fd7a:115c:a1e0::/48,no-resolve
+
+# tailscale 应用
+# 参考：https://fast.v2ex.com/t/999757
+PROCESS-NAME,Tailscale.exe
+PROCESS-NAME,Tailscale Service.exe
+PROCESS-NAME,tailscaled.exe
+PROCESS-NAME,tailscale-ipn.exe
+
+# tailscale 域名
+DOMAIN-KEYWORD,tailscale
+
+
