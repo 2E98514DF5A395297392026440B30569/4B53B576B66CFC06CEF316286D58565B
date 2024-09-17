@@ -309,8 +309,8 @@ dns:
 
 # Clash for Windows
 # Proxies module latency test settings
-cfw-latency-timeout: 3000
-cfw-latency-url: http://www.gstatic.com/generate_204
+#cfw-latency-timeout: 3000
+#cfw-latency-url: http://www.gstatic.com/generate_204
 
 # 混合配置（mixin）
 # 支持向所有配置文件中注入公共属性设置
@@ -337,10 +337,10 @@ cfw-latency-url: http://www.gstatic.com/generate_204
 # Options for proxy: none, chain(proxy group in connection chains), all
 # Options for profile: true, false
 # Options for mode: true, false
-cfw-conn-break-strategy:
-  proxy: none # none/chain/all
-  profile: true # true/false
-  mode: false # true/false
+#cfw-conn-break-strategy:
+#  proxy: none # none/chain/all
+#  profile: true # true/false
+#  mode: false # true/false
 
 # 自定义状态栏图标
 #cfw-tray-icon:
