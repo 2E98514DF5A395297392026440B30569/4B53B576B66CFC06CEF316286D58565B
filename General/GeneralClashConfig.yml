@@ -2,1190 +2,275 @@
 # 来源 https://github.com/ACL4SSR/ACL4SSR/blob/master/Clash/GeneralClashConfig.yml
 # 配置文件需要放置在 $HOME/.config/clash/config.yml
 # 或者运行目录下的config.yml
-#---------------------------------------------------#
-# 混合端口 HTTP和SOCKS5用一个端口
-mixed-port: 7890
+# 参考：https://wiki.metacubex.one/config/general/#_2
 
-# HTTP 代理端口
-# port: 7890
-
-# SOCKS5 代理端口
-# socks-port: 7891
-
-# Linux 和 macOS 的 redir 代理端口 (如需使用此功能，请取消注释)
-# redir-port: 7892
-
-# 不允许局域网的连接（可用来共享代理）
+#------------------------------------全局配置------------------------------------#
+# 允许其他设备经过 Clash 的代理端口访问互联网，可选值 true/false
 allow-lan: false
 
-# 仅在将allow-lan设置为true时适用
-#bind-address: "*"
-# #"*": 绑定所有IP地址
-# 192.168.122.11: 绑定单个IPv4地址
-# "[aaaa::a8aa:ff:fe09:57d8]": 绑定单个IPv6地址
+# 绑定地址，仅允许其他设备通过这个地址访问
+# "*" 绑定所有 IP 地址
+# 192.168.31.31 绑定单个 IPV4 地址
+# [aaaa::a8aa:ff:fe09:57d8] 绑定单个 IPV6 地址
+bind-address: "*"
 
-ipv6: true #默认启用ipv6
+# 允许连接的 IP 地址段，仅作用于 allow-lan 为 true 默认值为 0.0.0.0/0和 ::/0
+lan-allowed-ips: 
+  - 0.0.0.0/0
+  - ::/0
 
-# 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）/ script (脚本)
-mode: rule
+#lan-disallowed-ips: # 禁止连接的 IP 地址段，黑名单优先级高于白名单，默认值为空
+  #- 192.168.0.3/32
 
-# 设置日志输出级别 (默认级别：silent，即不输出任何内容，以避免因日志内容过大而导致程序内存溢出）。
-# 5 个级别：silent / error / warning / info / debug。级别越高日志输出量越大，越倾向于调试，若需要请自行开启。
-log-level: info
+#authentication: # http(s)/socks/mixed代理的用户验证
+  #- "user1:pass1"
+  #- "user2:pass2"
 
-# Clash 的 RESTful API
-external-controller: '127.0.0.1:9090'
+#skip-auth-prefixes: # 设置允许跳过验证的 IP 段
+  #- 127.0.0.1/8
+  #- ::1/128
 
-# 您可以将静态网页资源（如 clash-dashboard）放置在一个目录中，clash 将会服务于 `RESTful API/ui`
-# 参数应填写配置目录的相对路径或绝对路径。
-# http://127.0.0.1:9090/ui/#/
-# external-ui: folder
-# yacd面板：  https://github.com/haishanh/yacd
-# Razord面板：http://clash.razord.top/#/proxies
-# external-ui: dashboard
+mode: rule # 此项拥有默认值，默认为规则模式
 
-# RESTful API 的口令 (可选)
-# secret: ""
 
-# 实验性功能
-experimental:
-  ignore-resolve-fail: true # 忽略 DNS 解析失败，默认值为 true
-  # interface-name: en0 # outbound interface name
+# Clash 内核输出日志的等级，仅在控制台和控制页面输出
+# silent 静默，不输出
+# error 仅输出发生错误至无法使用的日志
+# warning 输出发生错误但不影响运行的日志，以及 error 级别内容
+# info 输出一般运行的内容，以及 error 和 warning 级别的日志
+# debug 尽可能的输出运行中所有的信息
+log-level: info 
 
-# 本地 SOCKS5 / HTTP(S) 服务认证
-#authentication:
-#  - "clash:clash"
-#  - "naruto:naruto"
-#  - "user2:pass2"
+# # 是否允许内核接受 IPv6 流量
+ipv6: true
 
-# 实验性功能 hosts, 支持通配符 (例如 *.clash.dev 甚至 *.foo.*.example.com)
-# 静态的域名 比 通配域名 具有更高的优先级 (foo.example.com 优先于 *.example.com)
+# 控制 Clash 发出 TCP Keep Alive 包的间隔，减少移动设备耗电问题的临时措施。单位为秒
+keep-alive-interval: 30
 
-# 注意: hosts 在 fake-ip 模式下不生效
-#hosts:
-#   '*.clash.dev': 127.0.0.1
-#   'alpha.clash.dev': '::1'
-#hosts:
-#  'mtalk.google.com': [108.177.97.188, 108.177.125.188, 74.125.204.188, 142.250.4.188, 172.217.194.188, 74.125.200.188]
-#  'mtalk.google.com': 108.177.97.188
+# 控制是否让 Clash 去匹配进程
+# always 开启，强制匹配所有进程
+# strict 默认，由 Clash 判断是否开启
+# off 不匹配进程，推荐在路由器上使用此模式
+find-process-mode: strict
 
+# 外部控制器，可以使用 RESTful API 来控制你的 Clash 内核
+# API 监听地址，你可以将 127.0.0.1 修改为 0.0.0.0 来监听所有 IP
+external-controller: 127.0.0.1:9090
+
+# Unix socket API 监听地址
+#external-controller-unix: mihomo.sock
+
+# HTTPS-API 监听地址，需要配置 tls 部分证书和其私钥配置，使用 TLS 也必须填写 external-controller
+#external-controller-tls: 127.0.0.1:9443
+
+# 在 RESTful API 端口上开启 DOH 服务器
+#external-doh-server: /dns-query
+
+# API 的访问密钥
+#secret: ""
+
+# 外部用户界面
+# 可以将静态网页资源 (比如 Clash-dashboard) 运行在 Clash API, 路径为 API 地址/ui
+# 可以为绝对路径，或者 Clash 工作目录的相对路径
+#external-ui: /path/to/ui/folder
+
+# 自定义外部用户界面名字
+# 非必须，更新时会更新到指定文件夹，不配置则直接更新到 external-ui 目录
+#external-ui-name: xd      #  合并为 external-ui/xd
+
+# 自定义外部用户界面下载地址
+#external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip" #从 GitHub Pages 分支获取
+
+# 缓存
+profile:
+  store-selected: true
+  # 储存 API 对策略组的选择，以供下次启动时使用
+  store-fake-ip: true
+  # 储存 fakeip 映射表，域名再次发生连接时，使用原有映射地址
+
+# 统一延迟
+# 开启统一延迟时，会计算 RTT，以消除连接握手等带来的不同类型节点的延迟差异
+# 可选值 true/false
+unified-delay: true
+
+# TCP 并发
+tcp-concurrent: true
+
+# 出站接口，Clash 的流量出站接口
+#interface-name: en0
+
+# 路由标记，为 Linux 下的出站连接提供默认流量标记
+#routing-mark: 6666
+
+# TLS，目前仅用于 API 的 https
+#tls:
+  #certificate: string # 证书 PEM 格式，或者 证书的路径
+  #private-key: string # 证书对应的私钥 PEM 格式，或者私钥路径
+
+# 全局客户端指纹
+# 全局 TLS 指纹，优先低于 proxy 内的 client-fingerprint。
+# 目前支持开启 TLS 传输的 TCP/grpc/WS/HTTP , 支持协议有 VLESS,Vmess 和 trojan.
+# 可选：chrome, firefox, safari, iOS, android, edge, 360, qq, random, 若选择 random, 则按 Cloudflare Radar 数据按概率生成一个现代浏览器指纹。
+global-client-fingerprint: chrome
+
+# GEOIP 数据模式
+# 更改 geoip 使用文件，mmdb 或者 dat，可选 true/false,true为 dat，此项有默认值 false
+geodata-mode: true
+
+# GEO 文件加载模式
+# standard：标准加载器
+# memconservative：专为内存受限 (小内存) 设备优化的加载器 (默认值)
+geodata-loader: memconservative
+
+# 自动更新 GEO
+geo-auto-update: true
+geo-update-interval: 24 # 更新间隔，单位为小时
+
+# 自定 GEO 下载地址
+geox-url:
+  geoip: "https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/geoip.dat"
+  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+  asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+
+# 自定全局 UA
+# 自定义外部资源下载时使用的的 UA，默认为 clash.meta
+global-ua: clash.meta
+
+#------------------------------------全局配置结束------------------------------------#
+#------------------------------------DNS--------------------------------------------#
 dns:
-  enable: true # 是否启用dns
+  # 是否启用，如为 false，则使用系统 DNS 解析
+  enable: true
+
+  # DOH 优先使用 http/3
+  prefer-h3: false
+
+  # 是否回应配置中的 hosts，默认 true
+  use-hosts: true
+
+  # 是否查询系统 hosts，默认 true
+  use-system-hosts: true
+
+  # dns 连接遵守路由规则，需配置 proxy-server-nameserver
+  respect-rules: false
+
+  # DNS 服务监听，仅支持 udp
+  listen: 0.0.0.0:1053
+
+  # 是否解析 IPV6, 如为 false, 则回应 AAAA 的空解析
   ipv6: false
-  default-nameserver: # 解决 DoH 域名的
-    - 223.5.5.5 # 阿里 DNS1
-    - 223.6.6.6 # 阿里 DNS2
-    - 114.114.114.114 # 114 DNS
-    - 119.29.29.29 # 腾讯 DNS
-    - 180.76.76.76 # 百度 DNS
-    - 180.184.1.1 # 字节跳动 TrafficRoute DNS
-    - 1.2.4.8 # CNNIC DNS
-    - 117.50.11.11 # ONE DNS拦截版 恶意网站拦截、广告过滤
-    - 117.50.10.10 # ONE DNS纯净版 直接返回其真实的响应结果
-  listen: 127.0.0.1:5353 
-  enhanced-mode: fake-ip # 模式：redir-host或fake-ip
+
+  # 默认 DNS, 用于解析 DNS 服务器 的域名
+  # 必须为 IP, 可为加密 DNS
+  default-nameserver:
+    - 223.5.5.5
+
+  # 可选值 fake-ip/redir-host，默认redir-host
+  enhanced-mode: fake-ip
+
+  # fakeip 下的 IP 段设置，tun 的默认 IPV4 地址 也使用此值作为参考
   fake-ip-range: 198.18.0.1/16
-  fake-ip-filter: # 不进行fake ip的域名
-# tailscale
-    - controlplane.tailscale.com
-    - log.tailscale.io
-#LAN
-    - +.lan
-    - +.localdomain
-    - +.example
-    - +.invalid
-    - +.localhost
-    - +.test
-    - +.local
-    - +.home.arpa
-#放行NTP服务
-    - time.*.com
-    - time.*.gov
-    - time.*.edu.cn
-    - time.*.apple.com
-    - time-ios.apple.com
-    - time1.*.com
-    - time2.*.com
-    - time3.*.com
-    - time4.*.com
-    - time5.*.com
-    - time6.*.com
-    - time7.*.com
-    - ntp.*.com
-    - ntp1.*.com
-    - ntp2.*.com
-    - ntp3.*.com
-    - ntp4.*.com
-    - ntp5.*.com
-    - ntp6.*.com
-    - ntp7.*.com
-    - +.time.edu.cn
-    - +.ntp.org.cn
-    - +.pool.ntp.org
-    - time1.cloud.tencent.com
-#放行网易云音乐
-    - music.163.com
-    - +.music.163.com
-    - +.126.net
-#百度音乐
-    - musicapi.taihe.com
-    - music.taihe.com
-#酷狗音乐
-    - songsearch.kugou.com
-    - trackercdn.kugou.com
-#酷我音乐
-    - +.kuwo.cn
-#JOOX音乐
-    - api-jooxtt.sanook.com
-    - api.joox.com
-    - joox.com
-#QQ音乐
-    - y.qq.com
-    - +.y.qq.com
-    - streamoc.music.tc.qq.com
-    - mobileoc.music.tc.qq.com
-    - isure.stream.qqmusic.qq.com
-    - dl.stream.qqmusic.qq.com
-    - aqqmusic.tc.qq.com
-    - amobile.music.tc.qq.com
-#虾米音乐
-    - +.xiami.com
-#咪咕音乐
-    - +.music.migu.cn
-    - music.migu.cn
-#win10本地连接检测
+
+  # 可选 blacklist/whitelist，默认blacklist，whitelist 即只有匹配成功才返回 fake-ip
+  fake-ip-filter-mode: blacklist
+
+  # fakeip 过滤，以下地址不会下发 fakeip 映射用于连接
+  fake-ip-filter:
+    - '*.lan'
+    # win10本地连接检测
     - +.msftconnecttest.com
     - +.msftncsi.com
-#QQ登录
-    - localhost.ptlogin2.qq.com
-    - localhost.sec.qq.com
-    - +.qq.com
-    - +.tencent.com
-#Game
-#Nintendo Switch
-    - +.srv.nintendo.net
-    - +.n.n.srv.nintendo.net
-#Sony PlayStation
-    - +.stun.playstation.net
-#Microsoft Xbox
-    - xbox.*.*.microsoft.com
-    - +.*.xboxlive.com
-    - xbox.*.microsoft.com
-    - xnotify.xboxlive.com
-#Wotgame
-    - +.battlenet.com.cn
-    - +.wotgame.cn
-    - +.wggames.cn
-    - +.wowsgame.cn
-    - +.wargaming.net
-#Golang
-    - proxy.golang.org
-#STUN
-    - stun.*.*
-    - stun.*.*.*
-    - +.stun.*.*
-    - +.stun.*.*.*
-    - +.stun.*.*.*.*
-    - +.stun.*.*.*.*.*
-#Linksys Router
-    - heartbeat.belkin.com
-    - +.linksys.com
-    - +.linksyssmartwifi.com
-#ASUS Router
-    - +.router.asus.com
-#Apple Software Update Service
-    - mesu.apple.com
-    - swscan.apple.com
-    - swquery.apple.com
-    - swdownload.apple.com
-    - swcdn.apple.com
-    - swdist.apple.com
-#Google
-    - lens.l.google.com
-    - stun.l.google.com
-    - na.b.g-tun.com
-#Netflix
-    - +.nflxvideo.net
-#FinalFantasy XIV Worldwide Server & CN Server
-    - +.square-enix.com
-    - +.finalfantasyxiv.com
-    - +.ffxiv.com
-    - +.ff14.sdo.com
-    - ff.dorado.sdo.com
-#Bilibili
-    - +.mcdn.bilivideo.cn
-#Disney Plus
-    - +.media.dssott.com
-#shark007 Codecs 
-    - shark007.net
-#Mijia
-    - Mijia Cloud
-#招商银行
-    - +.cmbchina.com
-    - +.cmbimg.com
-#AdGuard
-    - local.adguard.org
-#迅雷
-    - +.sandai.net
-    - +.n0808.com
-#Google One
-    - +.g-tun.com
-    
-  nameserver: #只有国内网站才会查询
-#   - dhcp://system 用不了，会报错
-    - 223.5.5.5 # 阿里 DNS1
-    - 223.6.6.6 # 阿里 DNS2
-    - 114.114.114.114 # 114 DNS 很多地方用不了
-    - 119.29.29.29 # 腾讯 DNS
-    - 180.76.76.76 # 百度 DNS
-    - 180.184.1.1 # 字节跳动 TrafficRoute DNS
-    - 1.2.4.8 # CNNIC DNS
-    - 117.50.11.11 # ONE DNS拦截版 恶意网站拦截、广告过滤
-    - 117.50.10.10 # ONE DNS纯净版 直接返回其真实的响应结果
-    - https://dns.alidns.com/dns-query # 阿里 DoH DNS
-    - tls://dns.alidns.com # 阿里 DoT DNS
-    - https://doh.pub/dns-query # 腾讯 DoH DNS
-    - tls://dot.pub # 腾讯 DoT DNS
-    - https://doh.360.cn/dns-query # 360 DoH DNS
+    # tailscale
+    - controlplane.tailscale.com
+    - log.tailscale.io
+
+
+  # 指定域名查询的解析服务器，可使用 geosite, 优先于 nameserver/fallback 查询
+  # 键支持域名通配
+  # 值支持字符串/数组
+  nameserver-policy:
+    #'+.arpa': '10.0.0.1'
+    #'rule-set:cn':
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+
+  # 默认的域名解析服务器
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+
+    # 特殊配置的DNS
+    #- 'https://dns.cloudflare.com/dns-query#h3=true' # 强制 HTTP/3
+    #- 'https://dns.cloudflare.com/dns-query#skip-cert-verify=true' # doh 跳过证书验证
+    #- 'https://8.8.8.8/dns-query#ecs=1.1.1.1/24' # 指定 dns 查询的 subnet 地址，仅支持 doh
+    #- 'https://8.8.8.8/dns-query#ecs=1.1.1.1/24&ecs-override=true' # 强制覆盖 dns 查询的 subnet 地址，仅支持 doh
+
+  # 后备域名解析服务器，一般情况下使用境外 DNS, 保证结果可信
+  # 配置 fallback后默认启用 fallback-filter,geoip-code为 cn
   fallback:
-    - 8.8.8.8 # 谷歌DNS
-    - 1.1.1.1 # Cloudflare DNS
-    - https://dns.google/dns-query # 谷歌 DoH DNS
-    - tls://dns.google:853 # 谷歌 DoT DNS
-    - https://cloudflare-dns.com/dns-query # Cloudflare DoH DNS
-    - tls://1.0.0.1:853 # Cloudflare DoT DNS
-    - https://dns.rubyfish.cn/dns-query 
-    - tls://dns.rubyfish.cn:853
+    - tls://8.8.4.4
+    - tls://1.1.1.1
 
+  # 代理节点域名解析服务器，仅用于解析代理节点的域名
+  proxy-server-nameserver:
+    - https://doh.pub/dns-query
 
-# 其实除了 geoip 配置以外，还有两种情况会使用 fallback 组的结果，就是根据 fallback-filter 中的 ipcidr 和 domain 配置项决定的。
-
+  # 后备域名解析服务器筛选，满足条件的将使用 fallback结果或只使用 fallback解析
   fallback-filter:
-# fallback-filter中geoip设置为true，对于每一个dns请求，clash会立即返回一个fake ip地址，并记录下此域名与fake ip的对应关系
-# 若判定规则中需要根据ip判定，则并发的请求所有nameserver、fallback中的dns服务器
-# 然后，clash得到nameserver中返回最快的dns服务器的解析结果ip，得到ip，判断是否为CN
-# 若为是，则使用nameserver组中解析速度最快的ip地址，若为否，则使用fallback组中解析最快的ip地址。
-# fallback-filter中geoip设置为true，如果是国内ip，走nameserver里面的dns解析（并发），国外ip就走国外dns解析（并发）
-     geoip: true # 默认为true
-     geoip-code: CN
-     ipcidr: # 在这个网段内的 IP 地址会被考虑为被污染的 IP
-# 如果 ip 或 domain 被这两个配置项命中，也会使用 fallback 中的dns解析。
-       - 240.0.0.0/4
-#     domain:
-#       - +.google.com
-# 1. clash DNS 请求逻辑：
-#   (1) 当访问一个域名时， nameserver 与 fallback 列表内的所有服务器并发请求，得到域名对应的 IP 地址。
-#   (2) clash 将选取 nameserver 列表内，解析最快的结果。
-#   (3) 若解析结果中，IP 地址属于 国外，那么 clash 将选择 fallback 列表内，解析最快的结果。
-#
-#   因此，我在 nameserver 和 fallback 内都放置了无污染、解析速度较快的国内 DNS 服务器，以达到最快的解析速度。
-#   但是 fallback 列表内服务器会用在解析境外网站，为了结果绝对无污染，我仅保留了支持 DoT/DoH 的两个服务器。
-#
-# 2. clash DNS 配置注意事项：
-#   (1) 如果您为了确保 DNS 解析结果无污染，请仅保留列表内以 tls:// 或 https:// 开头的 DNS 服务器，但是通常对于国内域名没有必要。
-#   (2) 如果您不在乎可能解析到污染的结果，更加追求速度。请将 nameserver 列表的服务器插入至 fallback 列表内，并移除重复项。
-#
-# 3. 关于 DNS over HTTPS (DoH) 和 DNS over TLS (DoT) 的选择：
-#   对于两项技术双方各执一词，而且会无休止的争论，各有利弊。各位请根据具体需求自行选择，但是配置文件内默认启用 DoT，因为目前国内没有封锁或管制。
-#   DoH: 以 https:// 开头的 DNS 服务器。拥有更好的伪装性，且几乎不可能被运营商或网络管理封锁，但查询效率和安全性可能略低。
-#   DoT: 以 tls:// 开头的 DNS 服务器。拥有更高的安全性和查询效率，但端口有可能被管制或封锁。
-#   若要了解更多关于 DoH/DoT 相关技术，请自行查阅规范文档。
 
-# 代理组
-# 下面这3个不要引到订阅里去 要不会出错
-# Will be ignored after profile selection
-#proxies:
-#  - name: Shadowsocks
-#    type: socks5
-#    server: 127.0.0.1
-#    port: 1080
-#proxy-groups:
-#  - name: Proxy
-#    type: select
-#    proxies:
-#      - Shadowsocks
-#rules:
-#  - 'MATCH,DIRECT'
+    # 是否启用 geoip 判断
+    geoip: true
 
-# Clash for Windows
-# Proxies module latency test settings
-#cfw-latency-timeout: 3000
-#cfw-latency-url: http://www.gstatic.com/generate_204
+    # 可选值为 国家缩写，默认值为 CN
+    # 除了 geoip-code 配置的国家 IP, 其他的 IP 结果会被视为污染
+    # geoip-code 配置的国家的结果会直接采用，否则将采用 fallback结果
+    geoip-code: CN
 
-# 混合配置（mixin）
-# 支持向所有配置文件中注入公共属性设置
-#cfw-profile-mixin:
-  #dns:
-    #enable: true
-    #listen: :53
-    #enhanced-mode: fake-ip
-    #nameserver:
-     #- 223.5.5.5 # 阿里DNS
-     #- 180.76.76.76 # 百度DNS
-     #- 119.29.29.29 # 腾讯DNS
-     #- 117.50.11.11 # ONE DNS拦截版 恶意网站拦截、广告过滤
-     #- 117.50.10.10 # ONE DNS纯净版 直接返回其真实的响应结果
-     #- 114.114.114.114 # 114DNS
-  #experimental:
-    #interface-name: WLAN
+    # 可选值为对于的 geosite 内包含的集合
+    # geosite 列表的内容被视为已污染，匹配到 geosite 的域名，将只使用 fallback解析，不去使用 nameserver
+    geosite:
+      - gfw
 
-#自定义配置目录
-#cfw-profiles-path: 'C:\Users\Administrator\.config\clash\profiles'
+    # 书写内容为 IP/掩码
+    # 这些网段的结果会被视为污染，nameserver解析出这些结果时将会采用 fallback的解析结果
+    ipcidr:
+      - 240.0.0.0/4
 
-# 打断连接
-# Identify strategy of breaking connections after switching to a new proxy/profile/mode
-# Options for proxy: none, chain(proxy group in connection chains), all
-# Options for profile: true, false
-# Options for mode: true, false
-#cfw-conn-break-strategy:
-#  proxy: none # none/chain/all
-#  profile: true # true/false
-#  mode: false # true/false
+    # 这些域名被视为已污染，匹配到这些域名，会直接使用 fallback解析，不去使用 nameserver
+    domain:
+      - '+.google.com'
+      - '+.facebook.com'
+      - '+.youtube.com'
+#------------------------------------DNS配置结束------------------------------------#
+#------------------------------------hosts-----------------------------------------#
+# 键支持域名通配
+# 值支持字符串/数组，域名重定向不支持数组
+# 完整的的域名优先级高于使用通配符的域名，例如：foo.example.com > *.example.com > .example.com
+hosts:
+  '*.clash.dev': 127.0.0.1
+  'alpha.clash.dev': '::1'
+#  test.com: [1.1.1.1, 2.2.2.2]
+#  baidu.com: google.com
+#------------------------------------hosts配置结束------------------------------------#
+#------------------------------------入站配置-----------------------------------------#
+# http(s) 代理端口
+port: 7890
 
-# 自定义状态栏图标
-#cfw-tray-icon:
-#default: .\resources\static\imgs\logo_64.png        # 默认图标
-#system-proxy-on: .\resources\static\imgs\custom.ico   # 开启系统代理后图标
+# socks4/4a/5 代理端口
+socks-port: 7891
 
-# 自定义字体
-#cfw-font-family: "Noto Sans TC"   # 系统中存在的字体
+# 混合端口
+# 混合端口是一个特殊的端口，它同时支持 HTTP(S) 和 SOCKS5 协议。您可以使用任何支持 HTTP 或 SOCKS 代理的程序连接到这个端口
+mixed-port: 7892
 
-# 自定义请求头
-#cfw-http-headers:
-  #token: "123456"
-  #cfw-version: "0.9.11"
+# 透明代理端口
+# redirect 端口仅限 Linux(Android) 以及 macOS 适用，tproxy 端口仅限 linux(Android) 适用
 
-# 自定义节点排序
-# 可选参数：
-#  default：按配置文件定义节点顺序
-#  latency：按节点延迟升序排列
-#  alphabet：按节点名称字母表排列
-# Sort proxies in Proxies module by default/latency/alphabet
-cfw-proxies-order: default
+# redirect 透明代理端口，仅能代理 TCP 流量
+redir-port: 7893
 
-# 子进程 启动其他应用
-# Run child process after CFW started
-# Refer: https://docs.cfw.lbyczf.com/contents/childprocess.html
-#cfw-child-process:
-  # 启动订阅转换程序，端口号7893
-  #- command: "subconverter.exe" # run.cmd 程序名称 subconverter.exe -cfw >>logs/run.log 2>&1
-    #args:
-      #- "-cfw" # 运行参数1
-      #- "-f" # 运行参数2
-      #- "pref-acl4ssr.yml" # 运行参数3
-    #options:
-      #cwd: subconverter # 子进程工作目录
-      #detached: true # 子进程独立于其父进程运行
-      #shell: true # 则在 shell 中运行 command
-      #windowsHide: true # 隐藏子进程的控制台窗口
-  # 启动网易云，端口号3333
-  #- command: "unblockneteasemusic.exe" # 启动网易云
-    #args:
-      #- "-p" # 运行参数1
-      #- "3333" # 运行参数2
-    #options:
-      #cwd: unblockNeteaseMusic # 子进程工作目录
-      #detached: true # 子进程独立于其父进程运行
-      #shell: true # 则在 shell 中运行 command
-      #windowsHide: true # 隐藏子进程的控制台窗口
+# tproxy 透明代理端口，可代理 TCP 与 UDP 流量
+tproxy-port: 7894
 
-# 系统代理跳过列表 cfw-bypass，就是windows版本的clash不走代理的，直接直连的
-# System proxy will ignore these domains(or ipnet)
-# 系统代理跳过列表-备份的，不起作用，
-# 使用时可以将cfw-bypass-bak与cfw-bypass内容互换
-#cfw-bypass-bak:
-#  # 原有字段不用删除
-#  - qq.com
-#  - 'music.163.com' # 网易云域名1
-#  - '*.music.126.net' # 网易云域名2
-#  - localhost
-#  - 127.*
-#  - 10.*
-#  - 172.16.*
-#  - 172.17.*
-#  - 172.18.*
-#  - 172.19.*
-#  - 172.20.*
-#  - 172.21.*
-#  - 172.22.*
-#  - 172.23.*
-#  - 172.24.*
-#  - 172.25.*
-#  - 172.26.*
-#  - 172.27.*
-#  - 172.28.*
-#  - 172.29.*
-#  - 172.30.*
-#  - 172.31.*
-#  - 192.168.*
-#  - <local>
-# 系统代理跳过列表 起作用的
-#cfw-bypass:
-#  # 直连列表
-#  # MyList
-#  - "*.13th.tech"
-#  - "*.423down.com"
-#  - "*.bokecc.com"
-#  - "*.chaipip.com"
-#  - "*.chinaplay.store"
-#  - "*.hrtsea.com"
-#  - "*.kaikeba.com"
-#  - "*.laomo.me"
-#  - "*.mpyit.com"
-#  - "*.msftconnecttest.com"
-#  - "*.msftncsi.com"
-#  - "*.qupu123.com"
-#  - "*.pdfwifi.com"
-#  - "*.zhenguanyu.biz"
-#  - "*.zhenguanyu.com"
-#  # CN域名直连(中国|公司|网络)
-#  - "*.cn"
-#  - "*.xn--fiqs8s"
-#  - "*.xn--55qx5d"
-#  - "*.xn--io0a7i"
-#  # 中国国内常见域名关键词直连
-#  - "*360buy*"
-#  - "*alicdn*"
-#  - "*alimama*"
-#  - "*alipay*"
-#  - "*appzapp*"
-#  - "*baidupcs*"
-#  - "*bilibili*"
-#  - "*ccgslb*"
-#  - "*chinacache*"
-#  - "*duobao*"
-#  - "*jdpay*"
-#  - "*moke*"
-#  - "*qhimg*"
-#  - "*vpimg*"
-#  - "*xiami*"
-#  - "*xiaomi*"
-#  # 360
-#  - "*.360.com"
-#  - "*.360kuai.com"
-#  - "*.360safe.com"
-#  - "*.dhrest.com"
-#  - "*.qhres.com"
-#  - "*.qhstatic.com"
-#  - "*.qhupdate.com"
-#  - "*.so.com"
-#  # 4399
-#  - "*.4399.com"
-#  - "*.4399pk.com"
-#  - "*.5054399.com"
-#  - "*.img4399.com"
-#  # 58
-#  - "*.58.com"
-#  # Alibaba
-#  - "*.1688.com"
-#  - "*.aliapp.org"
-#  - "*.alibaba.com"
-#  - "*.alibabacloud.com"
-#  - "*.alibabausercontent.com"
-#  - "*.alicdn.com"
-#  - "*.alicloudccp.com"
-#  - "*.aliexpress.com"
-#  - "*.aliimg.com"
-#  - "*.alikunlun.com"
-#  - "*.alipay.com"
-#  - "*.alipayobjects.com"
-#  - "*.alisoft.com"
-#  - "*.aliyun.com"
-#  - "*.aliyuncdn.com"
-#  - "*.aliyuncs.com"
-#  - "*.aliyundrive.com"
-#  - "*.amap.com"
-#  - "*.autonavi.com"
-#  - "*.dingtalk.com"
-#  - "*.ele.me"
-#  - "*.hichina.com"
-#  - "*.mmstat.com"
-#  - "*.mxhichina.com"
-#  - "*.soku.com"
-#  - "*.taobao.com"
-#  - "*.taobaocdn.com"
-#  - "*.tbcache.com"
-#  - "*.tbcdn.com"
-#  - "*.tmall.com"
-#  - "*.tmall.hk"
-#  - "*.ucweb.com"
-#  - "*.xiami.com"
-#  - "*.xiami.net"
-#  - "*.ykimg.com"
-#  - "*.youku.com"
-#  # Baidu
-#  - "*.baidu.com"
-#  - "*.baidubcr.com"
-#  - "*.baidupcs.com"
-#  - "*.baidustatic.com"
-#  - "*.bcebos.com"
-#  - "*.bdimg.com"
-#  - "*.bdstatic.com"
-#  - "*.bdurl.net"
-#  - "*.hao123.com"
-#  - "*.hao123img.com"
-#  - "*.jomodns.com"
-#  - "*.yunjiasu-cdn.net"
-#  # Bilibili
-#  - "*.acg.tv"
-#  - "*.acgvideo.com"
-#  - "*.b23.tv"
-#  - "*.bigfun.cn"
-#  - "*.bigfunapp.cn"
-#  - "*.biliapi.com"
-#  - "*.biliapi.net"
-#  - "*.bilibili.com"
-#  - "*.biligame.com"
-#  - "*.biligame.net"
-#  - "*.bilivideo.com"
-#  - "*.bilivideo.cn"
-#  - "*.hdslb.com"
-#  - "*.im9.com"
-#  - "*.smtcdns.net"
-#  # Blizzard
-#  - "*.battle.net"
-#  - "*.battlenet.com"
-#  - "*.blizzard.com"
-#  # ByteDance
-#  - "*.amemv.com"
-#  - "*.bdxiguaimg.com"
-#  - "*.bdxiguastatic.com"
-#  - "*.byted-static.com"
-#  - "*.bytedance.com"
-#  - "*.bytedance.net"
-#  - "*.bytedns.net"
-#  - "*.bytednsdoc.com"
-#  - "*.bytegoofy.com"
-#  - "*.byteimg.com"
-#  - "*.bytescm.com"
-#  - "*.bytetos.com"
-#  - "*.bytexservice.com"
-#  - "*.douyin.com"
-#  - "*.douyincdn.com"
-#  - "*.douyinpic.com"
-#  - "*.douyinstatic.com"
-#  - "*.douyinvod.com"
-#  - "*.feelgood.cn"
-#  - "*.feiliao.com"
-#  - "*.gifshow.com"
-#  - "*.huoshan.com"
-#  - "*.huoshanzhibo.com"
-#  - "*.ibytedapm.com"
-#  - "*.iesdouyin.com"
-#  - "*.ixigua.com"
-#  - "*.kspkg.com"
-#  - "*.pstatp.com"
-#  - "*.snssdk.com"
-#  - "*.toutiao.com"
-#  - "*.toutiao13.com"
-#  - "*.toutiaoapi.com"
-#  - "*.toutiaocdn.com"
-#  - "*.toutiaocdn.net"
-#  - "*.toutiaocloud.com"
-#  - "*.toutiaohao.com"
-#  - "*.toutiaohao.net"
-#  - "*.toutiaoimg.com"
-#  - "*.toutiaopage.com"
-#  - "*.wukong.com"
-#  - "*.zijieapi.com"
-#  - "*.zijieimg.com"
-#  - "*.zjbyte.com"
-#  - "*.zjcdn.com"
-#  # CCTV
-#  - "*.cctv.com"
-#  - "*.cctvpic.com"
-#  - "*.livechina.com"
-#  # ChinaNet
-#  - "*.21cn.com"
-#  # DiDi
-#  - "*.didialift.com"
-#  - "*.didiglobal.com"
-#  - "*.udache.com"
-#  # Douyu 斗鱼
-#  - "*.douyu.com"
-#  - "*.douyu.tv"
-#  - "*.douyuscdn.com"
-#  - "*.douyutv.com"
-#  # Epic
-#  - "*.epicgames.com"
-#  - "*.epicgames.dev"
-#  - "*.helpshift.com"
-#  - "*.paragon.com"
-#  - "*.unrealengine.com"
-#  # HuaWei
-#  - "*.dbankcdn.com"
-#  - "*.hc-cdn.com"
-#  - "*.hicloud.com"
-#  - "*.hihonor.com"
-#  - "*.huawei.com"
-#  - "*.huaweicloud.com"
-#  - "*.huaweishop.net"
-#  - "*.hwccpc.com"
-#  - "*.vmall.com"
-#  - "*.vmallres.com"
-#  # Iflytek 科大讯飞
-#  - "*.iflyink.com"
-#  - "*.iflyrec.com"
-#  - "*.iflytek.com"
-#  # Iqiyi
-#  - "*.71.am"
-#  - "*.71edge.com"
-#  - "*.iqiyi.com"
-#  - "*.iqiyipic.com"
-#  - "*.ppsimg.com"
-#  - "*.qiyi.com"
-#  - "*.qiyipic.com"
-#  - "*.qy.net"
-#  # JD
-#  - "*.360buy.com"
-#  - "*.360buyimg.com"
-#  - "*.jcloudcs.com"
-#  - "*.jd.com"
-#  - "*.jd.hk"
-#  - "*.jdcloud.com"
-#  - "*.jdpay.com"
-#  - "*.paipai.com"
-#  # Kingsoft
-#  - "*.iciba.com"
-#  - "*.ksosoft.com"
-#  - "*.ksyun.com"
-#  # Kuaishou 快手
-#  - "*.kuaishou.com"
-#  - "*.yximgs.com"
-#  # Meitu
-#  - "*.meitu.com"
-#  - "*.meitudata.com"
-#  - "*.meitustat.com"
-#  - "*.meipai.com"
-#  # LeTV 乐视
-#  - "*.le.com"
-#  - "*.lecloud.com"
-#  - "*.letv.com"
-#  - "*.letvcloud.com"
-#  - "*.letvimg.com"
-#  - "*.letvlive.com"
-#  - "*.letvstore.com"
-#  # MGTV 芒果TV
-#  - "*.hitv.com"
-#  - "*.hunantv.com"
-#  - "*.mgtv.com"
-#  # MI
-#  - "*.duokan.com"
-#  - "*.mi-img.com"
-#  - "*.mi.com"
-#  - "*.miui.com"
-#  - "*.xiaomi.com"
-#  - "*.xiaomi.net"
-#  - "*.xiaomicp.com"
-#  # NetEase
-#  - "*.126.com"
-#  - "*.126.net"
-#  - "*.127.net"
-#  - "*.163.com"
-#  - "*.163yun.com"
-#  - "*.lofter.com"
-#  - "*.netease.com"
-#  - "*.ydstatic.com"
-#  - "*.youdao.com"
-#  # PPTV、PPLive
-#  - "*.pplive.com"
-#  - "*.pptv.com"
-#  # PDD 拼多多
-#  - "*.pinduoduo.com"
-#  - "*.yangkeduo.com"
-#  # Sina
-#  - "*.leju.com"
-#  - "*.miaopai.com"
-#  - "*.sina.com"
-#  - "*.sina.com.cn"
-#  - "*.sina.cn"
-#  - "*.sinaapp.com"
-#  - "*.sinaapp.cn"
-#  - "*.sinaimg.com"
-#  - "*.sinaimg.cn"
-#  - "*.weibo.com"
-#  - "*.weibo.cn"
-#  - "*.weibocdn.com"
-#  - "*.weibocdn.cn"
-#  - "*.xiaoka.tv"
-#  # Sohu Sogo
-#  - "*.go2map.com"
-#  - "*.sogo.com"
-#  - "*.sogou.com"
-#  - "*.sogoucdn.com"
-#  - "*.sohu-inc.com"
-#  - "*.sohu.com"
-#  - "*.sohucs.com"
-#  - "*.sohuno.com"
-#  - "*.sohurdc.com"
-#  - "*.v-56.com"
-#  # Sony
-#  - "*.playstation.com"
-#  - "*.playstation.net"
-#  - "*.playstationnetwork.com"
-#  - "*.sony.com"
-#  - "*.sonyentertainmentnetwork.com"
-#  # SteamCN
-#  - "*.cm.steampowered.com"
-#  - "*.steamcontent.com"
-#  - "*.steamusercontent.com"
-#  - "*.steamchina.com"
-#  - "csgo.wmsj.cn"
-#  - "dota2.wmsj.cn"
-#  - "wmsjsteam.com"
-#  - "dl.steam.clngaa.com"
-#  - "dl.steam.ksyna.com"
-#  - "st.dl.bscstorage.net"
-#  - "st.dl.eccdnx.com"
-#  - "st.dl.pinyuncloud.com"
-#  - "xz.pphimalayanrt.com"
-#  - "steampipe.steamcontent.tnkjmec.com"
-#  - "steampowered.com.8686c.com"
-#  - "steamstatic.com.8686c.com"
-#  # Tencent
-#  - "*.foxmail.com"
-#  - "*.gtimg.com"
-#  - "*.idqqimg.com"
-#  - "*.igamecj.com"
-#  - "*.myapp.com"
-#  - "*.myqcloud.com"
-#  - "*.qq.com"
-#  - "*.qqmail.com"
-#  - "*.qqurl.com"
-#  - "*.smtcdns.com"
-#  - "*.smtcdns.net"
-#  - "*.soso.com"
-#  - "*.tencent-cloud.net"
-#  - "*.tencent.com"
-#  - "*.tencentmind.com"
-#  - "*.tenpay.com"
-#  - "*.wechat.com"
-#  - "*.weixin.com"
-#  - "*.weiyun.com"
-#  # Vip 唯品会
-#  - "*.appsimg.com"
-#  - "*.appvipshop.com"
-#  - "*.vip.com"
-#  - "*.vipstatic.com"
-#  # Ximalaya 喜马拉雅
-#  - "*.ximalaya.com"
-#  - "*.xmcdn.com"
-#  # Xunlei 迅雷
-#  - "*.00cdn.com"
-#  - "*.88cdn.com"
-#  - "*.kanimg.com"
-#  - "*.kankan.com"
-#  - "*.p2cdn.com"
-#  - "*.sandai.net"
-#  - "*.thundercdn.com"
-#  - "*.xunlei.com"
-#  # YYeTs 人人影视
-#  - "*.got001.com"
-#  - "*.p4pfile.com"
-#  - "*.rrys.tv"
-#  - "*.rrys2020.com"
-#  - "*.yyets.com"
-#  - "*.zimuzu.io"
-#  - "*.zimuzu.tv"
-#  - "*.zmz001.com"
-#  - "*.zmz002.com"
-#  - "*.zmz003.com"
-#  - "*.zmz004.com"
-#  - "*.zmz2019.com"
-#  - "*.zmzapi.com"
-#  - "*.zmzapi.net"
-#  - "*.zmzfile.com"
-#  # Private Tracker
-#  - "*announce*"
-#  - "*torrent*"
-#  - "*tracker*"
-#  - "*announce*"
-#  - "*torrent*"
-#  - "*tracker*"
-#  - "*.52pt.site"
-#  - "*.aidoru-online.me"
-#  - "*.alpharatio.cc"
-#  - "*.animebytes.tv"
-#  - "*.animetorrents.me"
-#  - "*.anthelion.me"
-#  - "*.asiancinema.me"
-#  - "*.audiences.me"
-#  - "*.avgv.cc"
-#  - "*.avistaz.to"
-#  - "*.awesome-hd.me"
-#  - "*.beitai.pt"
-#  - "*.beyond-hd.me"
-#  - "*.bibliotik.me"
-#  - "*.bittorrent.com"
-#  - "*.blutopia.xyz"
-#  - "*.broadcasthe.net"
-#  - "*.bt.byr.cn"
-#  - "*.bt.neu6.edu.cn"
-#  - "*.btschool.club"
-#  - "*.bwtorrents.tv"
-#  - "*.byr.pt"
-#  - "*.ccfbits.org"
-#  - "*.cgpeers.com"
-#  - "*.chdbits.co"
-#  - "*.cinemageddon.net"
-#  - "*.cinematik.net"
-#  - "*.cinemaz.to"
-#  - "*.classix-unlimited.co.uk"
-#  - "*.concertos.live"
-#  - "*.dicmusic.club"
-#  - "*.discfan.net"
-#  - "*.dxdhd.com"
-#  - "*.eastgame.org"
-#  - "*.empornium.me"
-#  - "*.et8.org"
-#  - "*.exoticaz.to"
-#  - "*.extremlymtorrents.ws"
-#  - "*.filelist.io"
-#  - "*.gainbound.net"
-#  - "*.gazellegames.net"
-#  - "*.gfxpeers.net"
-#  - "*.hd-space.org"
-#  - "*.hd-torrents.org"
-#  - "*.hd4.xyz"
-#  - "*.hd4fans.org"
-#  - "*.hdarea.co"
-#  - "*.hdatmos.club"
-#  - "*.hdbd.us"
-#  - "*.hdbits.org"
-#  - "*.hdchina.org"
-#  - "*.hdcity.city"
-#  - "*.hddolby.com"
-#  - "*.hdfans.org"
-#  - "*.hdhome.org"
-#  - "*.hdpost.top"
-#  - "*.hdroute.org"
-#  - "*.hdsky.me"
-#  - "*.hdstreet.club"
-#  - "*.hdtime.org"
-#  - "*.hdupt.com"
-#  - "*.hdzone.me"
-#  - "*.hhanclub.top"
-#  - "*.hitpt.com"
-#  - "*.hitpt.org"
-#  - "*.hudbt.hust.edu.cn"
-#  - "*.icetorrent.org"
-#  - "*.iptorrents.com"
-#  - "*.j99.info"
-#  - "*.joyhd.net"
-#  - "*.jpopsuki.eu"
-#  - "*.karagarga.in"
-#  - "*.keepfrds.com"
-#  - "*.landof.tv"
-#  - "*.leaguehd.com"
-#  - "*.lemonhd.org"
-#  - "*.lztr.me"
-#  - "*.m-team.cc"
-#  - "*.madsrevolution.net"
-#  - "*.moecat.best"
-#  - "*.morethan.tv"
-#  - "*.msg.vg"
-#  - "*.myanonamouse.net"
-#  - "*.nanyangpt.com"
-#  - "*.ncore.cc"
-#  - "*.nebulance.io"
-#  - "*.nicept.net"
-#  - "*.npupt.com"
-#  - "*.nwsuaf6.edu.cn"
-#  - "*.open.cd"
-#  - "*.oppaiti.me"
-#  - "*.orpheus.network"
-#  - "*.ourbits.club"
-#  - "*.passthepopcorn.me"
-#  - "*.pornbits.net"
-#  - "*.privatehd.to"
-#  - "*.pterclub.com"
-#  - "*.pthome.net"
-#  - "*.ptsbao.club"
-#  - "*.pttime.org"
-#  - "*.pussytorrents.org"
-#  - "*.redacted.ch"
-#  - "*.sdbits.org"
-#  - "*.sharkpt.net"
-#  - "*.sjtu.edu.cn"
-#  - "*.skyey2.com"
-#  - "*.soulvoice.club"
-#  - "*.springsunday.net"
-#  - "*.tju.pt"
-#  - "*.tjupt.org"
-#  - "*.torrentday.com"
-#  - "*.torrentleech.org"
-#  - "*.torrentseeds.org"
-#  - "*.totheglory.im"
-#  - "*.trontv.com"
-#  - "*.u2.dmhy.org"
-#  - "*.uhdbits.org"
-#  - "*.xauat6.edu.cn"
-#  # TeamViewer
-#  - "*.teamviewer.com"
-#  # Public Direct CDN 公共直连
-#  - "*.baomitu.com"
-#  - "*.bootcss.com"
-#  - "*.jiasule.com"
-#  - "*.staticfile.org"
-#  - "*.upaiyun.com"
-#  # AccelerateDirectSites
-#  - "*.10010.com"
-#  - "*.115.com"
-#  - "*.12306.com"
-#  - "*.17173.com"
-#  - "*.178.com"
-#  - "*.17k.com"
-#  - "*.360doc.com"
-#  - "*.36kr.com"
-#  - "*.3dmgame.com"
-#  - "*.51cto.com"
-#  - "*.51job.com"
-#  - "*.51jobcdn.com"
-#  - "*.56.com"
-#  - "*.8686c.com"
-#  - "*.abchina.com"
-#  - "*.abercrombie.com"
-#  - "*.acfun.tv"
-#  - "*.air-matters.com"
-#  - "*.air-matters.io"
-#  - "*.aixifan.com"
-#  - "*.algocasts.io"
-#  - "*.babytree.com"
-#  - "*.babytreeimg.com"
-#  - "*.baicizhan.com"
-#  - "*.baidupan.com"
-#  - "*.baike.com"
-#  - "*.biqudu.com"
-#  - "*.biquge.com"
-#  - "*.bitauto.com"
-#  - "*.c-ctrip.com"
-#  - "*.camera360.com"
-#  - "*.cdnmama.com"
-#  - "*.chaoxing.com"
-#  - "*.che168.com"
-#  - "*.chinacache.net"
-#  - "*.chinaso.com"
-#  - "*.chinaz.com"
-#  - "*.chinaz.net"
-#  - "*.chuimg.com"
-#  - "*.cibntv.net"
-#  - "*.clouddn.com"
-#  - "*.cloudxns.net"
-#  - "*.cn163.net"
-#  - "*.cnblogs.com"
-#  - "*.cnki.net"
-#  - "*.cnmstl.net"
-#  - "*.coolapk.com"
-#  - "*.coolapkmarket.com"
-#  - "*.csdn.net"
-#  - "*.ctrip.com"
-#  - "*.dangdang.com"
-#  - "*.dfcfw.com"
-#  - "*.dianping.com"
-#  - "*.dilidili.wang"
-#  - "*.douban.com"
-#  - "*.doubanio.com"
-#  - "*.dpfile.com"
-#  - "*.duowan.com"
-#  - "*.dxycdn.com"
-#  - "*.dytt8.net"
-#  - "*.easou.com"
-#  - "*.eastday.com"
-#  - "*.eastmoney.com"
-#  - "*.ecitic.com"
-#  - "*.ewqcxz.com"
-#  - "*.fang.com"
-#  - "*.fantasy.tv"
-#  - "*.feng.com"
-#  - "*.fengkongcloud.com"
-#  - "*.fir.im"
-#  - "*.frdic.com"
-#  - "*.fresh-ideas.cc"
-#  - "*.ganji.com"
-#  - "*.ganjistatic1.com"
-#  - "*.geetest.com"
-#  - "*.geilicdn.com"
-#  - "*.ghpym.com"
-#  - "*.godic.net"
-#  - "*.guazi.com"
-#  - "*.gwdang.com"
-#  - "*.gzlzfm.com"
-#  - "*.haibian.com"
-#  - "*.haosou.com"
-#  - "*.hollisterco.com"
-#  - "*.hongxiu.com"
-#  - "*.huajiao.com"
-#  - "*.hupu.com"
-#  - "*.huxiucdn.com"
-#  - "*.huya.com"
-#  - "*.ifeng.com"
-#  - "*.ifengimg.com"
-#  - "*.images-amazon.com"
-#  - "*.infzm.com"
-#  - "*.ipip.net"
-#  - "*.it168.com"
-#  - "*.ithome.com"
-#  - "*.ixdzs.com"
-#  - "*.jianguoyun.com"
-#  - "*.jianshu.com"
-#  - "*.jianshu.io"
-#  - "*.jianshuapi.com"
-#  - "*.jiathis.com"
-#  - "*.jmstatic.com"
-#  - "*.jumei.com"
-#  - "*.kaola.com"
-#  - "*.knewone.com"
-#  - "*.koowo.com"
-#  - "*.ksyungslb.com"
-#  - "*.kuaidi100.com"
-#  - "*.kugou.com"
-#  - "*.lancdns.com"
-#  - "*.landiannews.com"
-#  - "*.lanzou.com"
-#  - "*.lanzoui.com"
-#  - "*.lanzoux.com"
-#  - "*.lemicp.com"
-#  - "*.letitfly.me"
-#  - "*.lizhi.fm"
-#  - "*.lizhi.io"
-#  - "*.lizhifm.com"
-#  - "*.luoo.net"
-#  - "*.lvmama.com"
-#  - "*.lxdns.com"
-#  - "*.maoyan.com"
-#  - "*.meilishuo.com"
-#  - "*.meituan.com"
-#  - "*.meituan.net"
-#  - "*.meizu.com"
-#  - "*.migucloud.com"
-#  - "*.miguvideo.com"
-#  - "*.mobike.com"
-#  - "*.mogu.com"
-#  - "*.mogucdn.com"
-#  - "*.mogujie.com"
-#  - "*.moji.com"
-#  - "*.moke.com"
-#  - "*.msstatic.com"
-#  - "*.mubu.com"
-#  - "*.myunlu.com"
-#  - "*.nruan.com"
-#  - "*.nuomi.com"
-#  - "*.onedns.net"
-#  - "*.oneplus.com"
-#  - "*.onlinedown.net"
-#  - "*.oppo.com"
-#  - "*.oracle.com"
-#  - "*.oschina.net"
-#  - "*.ourdvs.com"
-#  - "*.polyv.net"
-#  - "*.qbox.me"
-#  - "*.qcloud.com"
-#  - "*.qcloudcdn.com"
-#  - "*.qdaily.com"
-#  - "*.qdmm.com"
-#  - "*.qhimg.com"
-#  - "*.qianqian.com"
-#  - "*.qidian.com"
-#  - "*.qihucdn.com"
-#  - "*.qin.io"
-#  - "*.qiniu.com"
-#  - "*.qiniucdn.com"
-#  - "*.qiniudn.com"
-#  - "*.qiushibaike.com"
-#  - "*.quanmin.tv"
-#  - "*.qunar.com"
-#  - "*.qunarzz.com"
-#  - "*.realme.com"
-#  - "*.repaik.com"
-#  - "*.ruguoapp.com"
-#  - "*.runoob.com"
-#  - "*.sankuai.com"
-#  - "*.segmentfault.com"
-#  - "*.sf-express.com"
-#  - "*.shumilou.net"
-#  - "*.simplecd.me"
-#  - "*.smzdm.com"
-#  - "*.snwx.com"
-#  - "*.soufunimg.com"
-#  - "*.sspai.com"
-#  - "*.startssl.com"
-#  - "*.suning.com"
-#  - "*.synology.com"
-#  - "*.taihe.com"
-#  - "*.th-sjy.com"
-#  - "*.tianqi.com"
-#  - "*.tianqistatic.com"
-#  - "*.tianyancha.com"
-#  - "*.tianyaui.com"
-#  - "*.tietuku.com"
-#  - "*.tiexue.net"
-#  - "*.tmiaoo.com"
-#  - "*.trip.com"
-#  - "*.ttmeiju.com"
-#  - "*.tudou.com"
-#  - "*.tuniu.com"
-#  - "*.tuniucdn.com"
-#  - "*.umengcloud.com"
-#  - "*.upyun.com"
-#  - "*.uxengine.net"
-#  - "*.videocc.net"
-#  - "*.vivo.com"
-#  - "*.wandoujia.com"
-#  - "*.weather.com"
-#  - "*.weico.cc"
-#  - "*.weidian.com"
-#  - "*.weiphone.com"
-#  - "*.weiphone.net"
-#  - "*.womai.com"
-#  - "*.wscdns.com"
-#  - "*.xdrig.com"
-#  - "*.xhscdn.com"
-#  - "*.xiachufang.com"
-#  - "*.xiaohongshu.com"
-#  - "*.xiaojukeji.com"
-#  - "*.xinhuanet.com"
-#  - "*.xip.io"
-#  - "*.xitek.com"
-#  - "*.xiumi.us"
-#  - "*.xslb.net"
-#  - "*.xueqiu.com"
-#  - "*.yach.me"
-#  - "*.yeepay.com"
-#  - "*.yhd.com"
-#  - "*.yihaodianimg.com"
-#  - "*.yinxiang.com"
-#  - "*.yinyuetai.com"
-#  - "*.yixia.com"
-#  - "*.ys168.com"
-#  - "*.yuewen.com"
-#  - "*.yy.com"
-#  - "*.yystatic.com"
-#  - "*.zealer.com"
-#  - "*.zhangzishi.cc"
-#  - "*.zhanqi.tv"
-#  - "*.zhaopin.com"
-#  - "*.zhihu.com"
-#  - "*.zhimg.com"
-#  - "*.zhongsou.com"
-#  - "*.zhuihd.com"
-#  - "localhost"
-#  - 127.*
-#  - 10.*
-#  - 172.16.*
-#  - 172.17.*
-#  - 172.18.*
-#  - 172.19.*
-#  - 172.20.*
-#  - 172.21.*
-#  - 172.22.*
-#  - 172.23.*
-#  - 172.24.*
-#  - 172.25.*
-#  - 172.26.*
-#  - 172.27.*
-#  - 172.28.*
-#  - 172.29.*
-#  - 172.30.*
-#  - 172.31.*
-#  - 192.168.*
-#  - <local>
+#------------------------------------入站配置结束-------------------------------------#
