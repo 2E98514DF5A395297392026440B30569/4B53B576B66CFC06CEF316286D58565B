@@ -189,11 +189,11 @@ dns:
   # 指定域名查询的解析服务器，可使用 geosite, 优先于 nameserver/fallback 查询
   # 键支持域名通配
   # 值支持字符串/数组
-  nameserver-policy:
+  #nameserver-policy:
     #'+.arpa': '10.0.0.1'
     #'rule-set:cn':
-    - https://doh.pub/dns-query
-    - https://dns.alidns.com/dns-query
+    #- https://doh.pub/dns-query
+    #- https://dns.alidns.com/dns-query
 
   # 默认的域名解析服务器
   nameserver:
@@ -229,8 +229,8 @@ dns:
 
     # 可选值为对于的 geosite 内包含的集合
     # geosite 列表的内容被视为已污染，匹配到 geosite 的域名，将只使用 fallback解析，不去使用 nameserver
-    geosite:
-      - gfw
+    #geosite:
+      #- gfw
 
     # 书写内容为 IP/掩码
     # 这些网段的结果会被视为污染，nameserver解析出这些结果时将会采用 fallback的解析结果
