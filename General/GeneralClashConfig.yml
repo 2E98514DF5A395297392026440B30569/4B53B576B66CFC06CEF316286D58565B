@@ -164,7 +164,9 @@ dns:
   # 默认 DNS, 用于解析 DNS 服务器 的域名
   # 必须为 IP, 可为加密 DNS
   default-nameserver:
+    - 114.114.114.114
     - 223.5.5.5
+    - 119.29.9.29
 
   # 可选值 fake-ip/redir-host，默认redir-host
   enhanced-mode: fake-ip
