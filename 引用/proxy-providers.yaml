@@ -1,0 +1,34 @@
+proxy-providers:
+  名字:
+    type: http
+    path: ./名字.yaml
+    url: "http://xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    interval: 3600
+    health-check:
+        enable: true
+        url: http://www.gstatic.com/generate_204
+        interval: 300
+
+  "provide":
+    type: file
+    path: ./provide/subscription.yaml
+    # filter: 'xxx' # Supports regular expressions to filter by node name
+    # exclude-filter: 'ctb' # Supports regular expressions to exclude based on node name
+    # exclude-type: 'ss|http' # Does not support regular expressions, separated by '|', excluded by node type
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 3600
+
+  # "provide-cloud":
+    # type: http
+    # url: "your url"
+    # interval: 3600
+    # path: ./provide/cloud.yml
+    # # filter: 'xxx' # Supports regular expressions to filter by node name
+    # # exclude-filter: 'ctb' # Supports regular expressions to exclude based on node name
+    # # exclude-type: 'ss|http' # Tidak mendukung ekspresi reguler, dipisahkan dengan '|', dikecualikan menurut jenis node
+    # health-check:
+      # enable: true
+      # url: http://www.gstatic.com/generate_204
+      # interval: 3600
